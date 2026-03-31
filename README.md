@@ -85,6 +85,7 @@ Continue with step 4 of [Quickstart](#quickstart-install).
 - PHP 8.0 to 8.3 with extensions: PDO_PGSQL, cURL
 - PostgreSQL 12 or greater
 - Apache web server with mod_rewrite and mod_headers enabled
+- Git
 
 #### Step-by-step Installation
 
@@ -97,13 +98,11 @@ Continue with step 4 of [Quickstart](#quickstart-install).
    sudo a2enmod headers
    ```
 
-2. **Download and extract cyberx**
+2. **Clone cyberx from GitHub**
    
    ```bash
    cd /var/www
-   sudo wget https://www.tirreno.com/download.php -O cyberx.zip
-   sudo unzip cyberx.zip
-   sudo mv cyberx-master cyberx
+   sudo git clone https://github.com/tanishq950/cyberx.git cyberx
    sudo chown -R www-data:www-data /var/www/cyberx
    sudo chmod -R 755 /var/www/cyberx
    ```
@@ -181,6 +180,7 @@ Continue with step 4 of [Quickstart](#quickstart-install).
 - PHP 8.0 to 8.3 (VC Redist compatible) with PDO_PGSQL and cURL extensions
 - PostgreSQL 12 or greater
 - Apache HTTP Server or IIS with URL Rewrite module
+- Git for Windows
 
 #### Step-by-step Installation
 
@@ -226,11 +226,14 @@ Continue with step 4 of [Quickstart](#quickstart-install).
    </IfModule>
    ```
 
-5. **Download and extract cyberx**
+5. **Clone cyberx from GitHub**
    
-   - Download from [tirreno.com/download.php](https://www.tirreno.com/download.php)
-   - Extract to `C:\Apache24\htdocs\cyberx`
-   - Ensure proper permissions on the directory
+   ```cmd
+   cd C:\Apache24\htdocs
+   git clone https://github.com/tanishq950/cyberx.git cyberx
+   ```
+
+   Ensure proper permissions on the directory.
 
 6. **Create PostgreSQL database**
    
