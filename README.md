@@ -1,7 +1,7 @@
 # cyberx
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ec30c28f67de476f8b98d2798079bdf0)](https://app.codacy.com/gh/CyberXTechnologies/cyberx/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-[![Docker Pulls](https://img.shields.io/docker/pulls/cyberx/cyberx?style=flat)](https://hub.docker.com/r/cyberx/cyberx/)
+[![Docker Pulls]()](https://hub.docker.com/r/cyberx/cyberx/)
 
 <p align="center">
     <a href="https://www.tirreno.com/" target="_blank">
