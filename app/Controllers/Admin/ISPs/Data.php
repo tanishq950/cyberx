@@ -1,26 +1,26 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Controllers\Admin\ISPs;
+namespace CyberX\Controllers\Admin\ISPs;
 
-class Data extends \Tirreno\Controllers\Admin\Base\Data {
+class Data extends \CyberX\Controllers\Admin\Base\Data {
     public function getList(int $apiKey): array {
         $result = [];
-        $model = new \Tirreno\Models\Grid\Isps\Grid($apiKey);
+        $model = new \CyberX\Models\Grid\Isps\Grid($apiKey);
 
         $map = [
             'userId'        => 'getIspsByUserId',
@@ -34,7 +34,7 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
 
         $ids = array_column($result['data'], 'id');
         if ($ids) {
-            $model = new \Tirreno\Models\Isp();
+            $model = new \CyberX\Models\Isp();
             $model->updateTotalsByEntityIds($ids, $apiKey);
             $result['data'] = $model->refreshTotals($result['data'], $apiKey);
         }

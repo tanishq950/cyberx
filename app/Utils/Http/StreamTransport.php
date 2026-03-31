@@ -1,28 +1,28 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Utils\Http;
+namespace CyberX\Utils\Http;
 
-final class StreamTransport implements \Tirreno\Interfaces\HttpTransportInterface {
+final class StreamTransport implements \CyberX\Interfaces\HttpTransportInterface {
     public function isAvailable(): bool {
         return function_exists('file_get_contents');
     }
 
-    public function request(\Tirreno\Entities\HttpRequest $request): \Tirreno\Entities\HttpResponse {
+    public function request(\CyberX\Entities\HttpRequest $request): \CyberX\Entities\HttpResponse {
         $options = [
             'http' => [
                 'method' => $request->method(),
@@ -52,16 +52,16 @@ final class StreamTransport implements \Tirreno\Interfaces\HttpTransportInterfac
         $code = $this->extractHttpStatus($respHeaders);
 
         if ($raw === null) {
-            $result = \Tirreno\Entities\HttpResponse::failure($code, 'stream_request_failed', $respHeaders);
+            $result = \CyberX\Entities\HttpResponse::failure($code, 'stream_request_failed', $respHeaders);
 
             return $result;
         }
 
-        return \Tirreno\Entities\HttpResponse::success($code, $raw, $respHeaders);
+        return \CyberX\Entities\HttpResponse::success($code, $raw, $respHeaders);
     }
 
     private function safeFileGetContents(string $url, ?array $options): array {
-        set_error_handler([\Tirreno\Utils\ErrorHandler::class, 'exceptionErrorHandler']);
+        set_error_handler([\CyberX\Utils\ErrorHandler::class, 'exceptionErrorHandler']);
 
         try {
             $context = null;

@@ -1,14 +1,14 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class C03 extends \Tirreno\Assets\Rule {
+class C03 extends \CyberX\Assets\Rule {
     public const NAME = 'China IP address';
     public const DESCRIPTION = 'IP address located in China. This region is associated with a higher risk.';
     public const ATTRIBUTES = ['ip'];
 
     protected function prepareParams(array $params): array {
-        $params['eip_has_specific_country'] = in_array(\Tirreno\Utils\Constants::get()->COUNTRY_CODE_CHINA, $params['eip_country_id']);
+        $params['eip_has_specific_country'] = in_array(\CyberX\Utils\Constants::get()->COUNTRY_CODE_CHINA, $params['eip_country_id']);
 
         return $params;
     }

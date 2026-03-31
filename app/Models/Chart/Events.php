@@ -1,21 +1,21 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Models\Chart;
+namespace CyberX\Models\Chart;
 
 class Events extends Base {
     protected ?string $DB_TABLE_NAME = 'event';
@@ -32,22 +32,22 @@ class Events extends Base {
     }
 
     private function getFirstLine(int $apiKey): array {
-        $dateRange = \Tirreno\Utils\DateRange::getDatesRangeFromRequest();
+        $dateRange = \CyberX\Utils\DateRange::getDatesRangeFromRequest();
         if (!$dateRange) {
             $dateRange = [
                 'endDate' => date('Y-m-d H:i:s'),
                 'startDate' => date('Y-m-d H:i:s', 0),
             ];
         }
-        $offset = \Tirreno\Utils\Timezones::getCurrentOperatorOffset();
-        [$alertTypesParams, $alertFlatIds]      = $this->getArrayPlaceholders(\Tirreno\Utils\Constants::get()->ALERT_EVENT_TYPES, 'alert');
-        [$editTypesParams, $editFlatIds]        = $this->getArrayPlaceholders(\Tirreno\Utils\Constants::get()->EDITING_EVENT_TYPES, 'edit');
-        [$normalTypesParams, $normalFlatIds]    = $this->getArrayPlaceholders(\Tirreno\Utils\Constants::get()->NORMAL_EVENT_TYPES, 'normal');
+        $offset = \CyberX\Utils\Timezones::getCurrentOperatorOffset();
+        [$alertTypesParams, $alertFlatIds]      = $this->getArrayPlaceholders(\CyberX\Utils\Constants::get()->ALERT_EVENT_TYPES, 'alert');
+        [$editTypesParams, $editFlatIds]        = $this->getArrayPlaceholders(\CyberX\Utils\Constants::get()->EDITING_EVENT_TYPES, 'edit');
+        [$normalTypesParams, $normalFlatIds]    = $this->getArrayPlaceholders(\CyberX\Utils\Constants::get()->NORMAL_EVENT_TYPES, 'normal');
         $params = [
             ':api_key'      => $apiKey,
             ':end_time'     => $dateRange['endDate'],
             ':start_time'   => $dateRange['startDate'],
-            ':resolution'   => \Tirreno\Utils\DateRange::getResolutionFromRequest(),
+            ':resolution'   => \CyberX\Utils\DateRange::getResolutionFromRequest(),
             ':offset'       => strval($offset),
         ];
         $params = array_merge($params, $alertTypesParams);

@@ -1,21 +1,21 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Models\Chart;
+namespace CyberX\Models\Chart;
 
 class SessionStat extends Base {
     protected ?string $DB_TABLE_NAME = 'event_session';
@@ -34,11 +34,11 @@ class SessionStat extends Base {
         }
 
         // use offset shift because $startTs/$endTs compared with shifted ['ts']
-        $offset = \Tirreno\Utils\Timezones::getCurrentOperatorOffset();
-        $datesRange = \Tirreno\Utils\DateRange::getLatestNDatesRangeFromRequest(14, $offset);
+        $offset = \CyberX\Utils\Timezones::getCurrentOperatorOffset();
+        $datesRange = \CyberX\Utils\DateRange::getLatestNDatesRangeFromRequest(14, $offset);
         $endTs = strtotime($datesRange['endDate']);
         $startTs = strtotime($datesRange['startDate']);
-        $step = \Tirreno\Utils\Constants::get()->CHART_RESOLUTION[\Tirreno\Utils\DateRange::getResolutionFromRequest()];
+        $step = \CyberX\Utils\Constants::get()->CHART_RESOLUTION[\CyberX\Utils\DateRange::getResolutionFromRequest()];
 
         $endTs = $endTs - ($endTs % $step);
         $startTs = $startTs - ($startTs % $step);
@@ -94,16 +94,16 @@ class SessionStat extends Base {
 
     protected function executeOnRangeById(string $query, int $apiKey): array {
         // do not use offset because :start_time/:end_time compared with UTC event.time
-        $dateRange = \Tirreno\Utils\DateRange::getLatestNDatesRangeFromRequest(14);
-        $offset = \Tirreno\Utils\Timezones::getCurrentOperatorOffset();
+        $dateRange = \CyberX\Utils\DateRange::getLatestNDatesRangeFromRequest(14);
+        $offset = \CyberX\Utils\Timezones::getCurrentOperatorOffset();
 
         $params = [
             ':api_key'      => $apiKey,
             ':end_time'     => $dateRange['endDate'],
             ':start_time'   => $dateRange['startDate'],
-            //':resolution'   => \Tirreno\Utils\DateRange::getResolutionFromRequest(),
-            ':resolution'   => \Tirreno\Utils\Constants::get()->SECONDS_IN_DAY,
-            ':id'           => \Tirreno\Utils\Conversion::getIntRequestParam('id'),
+            //':resolution'   => \CyberX\Utils\DateRange::getResolutionFromRequest(),
+            ':resolution'   => \CyberX\Utils\Constants::get()->SECONDS_IN_DAY,
+            ':id'           => \CyberX\Utils\Conversion::getIntRequestParam('id'),
             ':offset'       => strval($offset),     // str for postgres
         ];
 

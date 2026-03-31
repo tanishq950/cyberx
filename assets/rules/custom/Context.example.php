@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tirreno\Rules\Custom;
+namespace CyberX\Rules\Custom;
 
 /**
  * @example This is a sample implementation for demonstration purposes.
  * @internal Do not use in production - copy and modify for your own rules.
  */
-class Context extends \Tirreno\Assets\Context {
+class Context extends \CyberX\Assets\Context {
     /** @var string Database table to query for context data */
     protected ?string $DB_TABLE_NAME = 'event_account';
 

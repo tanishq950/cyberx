@@ -1,28 +1,28 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Controllers\Api;
+namespace CyberX\Controllers\Api;
 
 abstract class Endpoint {
     public const API_KEY = 'Api-Key';
 
     protected \Base $f3;
 
-    protected \Tirreno\Views\Json $response;
+    protected \CyberX\Views\Json $response;
     protected string $responseType;
     protected int $error;
     protected int $statusCode;
@@ -31,7 +31,7 @@ abstract class Endpoint {
 
     private string $apiKeyString;
     protected int $apiKeyId;
-    //protected \Tirreno\Interfaces\ApiKeyAccessAuthorizationInterface $authorizationModel;
+    //protected \CyberX\Interfaces\ApiKeyAccessAuthorizationInterface $authorizationModel;
 
     protected array $body = [];
 
@@ -42,10 +42,10 @@ abstract class Endpoint {
         $this->f3->set('ONERROR', function (): void {
             $this->handleInternalServerError();
         });
-        \Tirreno\Utils\Database::initConnect(false);
+        \CyberX\Utils\Database::initConnect(false);
 
-        $this->response = new \Tirreno\Views\Json();
-        $this->responseType = \Tirreno\Utils\Constants::get()->SINGLE_RESPONSE_TYPE;
+        $this->response = new \CyberX\Views\Json();
+        $this->responseType = \CyberX\Utils\Constants::get()->SINGLE_RESPONSE_TYPE;
     }
 
     public function beforeRoute(): void {
@@ -86,11 +86,11 @@ abstract class Endpoint {
             return;
         }
 
-        $this->setError(400, \Tirreno\Utils\ErrorCodes::REST_API_KEY_DOES_NOT_EXIST);
+        $this->setError(400, \CyberX\Utils\ErrorCodes::REST_API_KEY_DOES_NOT_EXIST);
     }
 
     protected function authenticate(): void {
-        $model = new \Tirreno\Models\ApiKeys();
+        $model = new \CyberX\Models\ApiKeys();
         $apiKeyId = $model->getKeyIdByHash($this->apiKeyString);
 
         if ($apiKeyId) {
@@ -99,7 +99,7 @@ abstract class Endpoint {
             return;
         }
 
-        $this->setError(401, \Tirreno\Utils\ErrorCodes::REST_API_KEY_IS_NOT_CORRECT);
+        $this->setError(401, \CyberX\Utils\ErrorCodes::REST_API_KEY_IS_NOT_CORRECT);
     }
 
     /*protected function authorize(string $subjectId): void {
@@ -113,7 +113,7 @@ abstract class Endpoint {
             return;
         }
 
-        $this->setError(403, \Tirreno\Utils\ErrorCodes::REST_API_NOT_AUTHORIZED);
+        $this->setError(403, \CyberX\Utils\ErrorCodes::REST_API_NOT_AUTHORIZED);
     }*/
 
     protected function getBodyProp(string $key, string $paramType = 'string'): string|int|array|null {
@@ -127,12 +127,12 @@ abstract class Endpoint {
     }
 
     protected function saveLogbook(): void {
-        $model = new \Tirreno\Models\Logbook();
+        $model = new \CyberX\Models\Logbook();
         $model->add(
             $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1',
             $this->f3->get('PATH'),
             null,
-            !isset($this->error) ? \Tirreno\Utils\Constants::get()->LOGBOOK_ERROR_TYPE_SUCCESS : \Tirreno\Utils\Constants::get()->LOGBOOK_ERROR_TYPE_CRITICAL_ERROR,
+            !isset($this->error) ? \CyberX\Utils\Constants::get()->LOGBOOK_ERROR_TYPE_SUCCESS : \CyberX\Utils\Constants::get()->LOGBOOK_ERROR_TYPE_CRITICAL_ERROR,
             !isset($this->error) ? null : json_encode(['Undefined error']),
             json_encode($this->body),
             $this->formatStartTime(),
@@ -160,8 +160,8 @@ abstract class Endpoint {
     }
 
     private function handleInternalServerError(): void {
-        $errorData = \Tirreno\Utils\ErrorHandler::getErrorDetails($this->f3);
-        \Tirreno\Utils\ErrorHandler::saveErrorInformation($this->f3, $errorData);
+        $errorData = \CyberX\Utils\ErrorHandler::getErrorDetails($this->f3);
+        \CyberX\Utils\ErrorHandler::saveErrorInformation($this->f3, $errorData);
 
         $this->setError(500, 500);
     }

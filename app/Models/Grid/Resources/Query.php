@@ -1,23 +1,23 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Models\Grid\Resources;
+namespace CyberX\Models\Grid\Resources;
 
-class Query extends \Tirreno\Models\Grid\Base\Query {
+class Query extends \CyberX\Models\Grid\Base\Query {
     protected ?string $defaultOrder = 'event_url.id DESC';
     protected string $dateRangeField = 'event_url.lastseen';
 
@@ -110,7 +110,7 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
     private function applySearch(string &$query, array &$queryParams): void {
         $this->applyDateRange($query, $queryParams);
 
-        $search = \Tirreno\Utils\Conversion::getDictionaryRequestParam('search');
+        $search = \CyberX\Utils\Conversion::getDictionaryRequestParam('search');
         $searchConditions = $this->injectIdQuery('event_url.id', $queryParams);
 
         if (isset($search['value']) && is_string($search['value']) && $search['value'] !== '') {
@@ -129,13 +129,13 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
     }
 
     private function applyFileExtensions(string &$query, array &$queryParams): void {
-        $fileTypeIds = \Tirreno\Utils\Conversion::getArrayRequestParam('fileTypeIds');
+        $fileTypeIds = \CyberX\Utils\Conversion::getArrayRequestParam('fileTypeIds');
         if (!$fileTypeIds) {
             return;
         }
 
-        $list = \Tirreno\Utils\Assets\Lists\FileExtensions::getList();
-        $keys = \Tirreno\Utils\Assets\Lists\FileExtensions::getKeys();
+        $list = \CyberX\Utils\Assets\Lists\FileExtensions::getList();
+        $keys = \CyberX\Utils\Assets\Lists\FileExtensions::getKeys();
 
         $extensions = [];
 

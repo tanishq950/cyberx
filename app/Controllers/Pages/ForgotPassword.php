@@ -1,27 +1,27 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Controllers\Pages;
+namespace CyberX\Controllers\Pages;
 
 class ForgotPassword extends Base {
     public ?string $page = 'ForgotPassword';
 
     public function getPageParams(): array {
-        if (!\Tirreno\Utils\Variables::getForgotPasswordAllowed()) {
+        if (!\CyberX\Utils\Variables::getForgotPasswordAllowed()) {
             return [];
         }
 
@@ -31,16 +31,16 @@ class ForgotPassword extends Base {
 
         if ($this->isPostRequest()) {
             $params = $this->extractRequestParams(['token', 'email']);
-            $errorCode = \Tirreno\Utils\Validators::validateForgotPassword($params);
+            $errorCode = \CyberX\Utils\Validators::validateForgotPassword($params);
 
             if (!$errorCode) {
-                $email = \Tirreno\Utils\Conversion::getStringRequestParam('email');
-                $model = new \Tirreno\Models\Operator();
+                $email = \CyberX\Utils\Conversion::getStringRequestParam('email');
+                $model = new \CyberX\Models\Operator();
                 $operatorId = $model->getActivatedByEmail($email);
 
                 if ($operatorId) {
                     // Create forgot password record.
-                    $forgotPasswordModel = new \Tirreno\Models\ForgotPassword();
+                    $forgotPasswordModel = new \CyberX\Models\ForgotPassword();
                     $renewKey = $forgotPasswordModel->insertRecord($operatorId);
 
                     // Send forgot password email.
@@ -51,7 +51,7 @@ class ForgotPassword extends Base {
                 usleep(rand(500000, 1000000));
 
                 // Always report back that the email was sent.
-                $pageParams['SUCCESS_CODE'] = \Tirreno\Utils\ErrorCodes::RENEW_KEY_CREATED;
+                $pageParams['SUCCESS_CODE'] = \CyberX\Utils\ErrorCodes::RENEW_KEY_CREATED;
             }
 
             $pageParams['VALUES'] = $params;
@@ -62,9 +62,9 @@ class ForgotPassword extends Base {
     }
 
     private function sendPasswordRenewEmail(int $operatorId, string $renewKey): void {
-        $url = \Tirreno\Utils\Variables::getHostWithProtocolAndBase();
+        $url = \CyberX\Utils\Variables::getHostWithProtocolAndBase();
 
-        $operator = \Tirreno\Entities\Operator::getById($operatorId);
+        $operator = \CyberX\Entities\Operator::getById($operatorId);
 
         $toName = $operator->firstname;
         $toAddress = $operator->email;
@@ -75,6 +75,6 @@ class ForgotPassword extends Base {
         $renewUrl = sprintf('%s/password-recovering/%s', $url, $renewKey);
         $message = sprintf($message, $renewUrl);
 
-        \Tirreno\Utils\Mailer::send($toName, $toAddress, $subject, $message);
+        \CyberX\Utils\Mailer::send($toName, $toAddress, $subject, $message);
     }
 }

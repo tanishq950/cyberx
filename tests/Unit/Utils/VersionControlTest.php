@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\VersionControl;
+use CyberX\Utils\VersionControl;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Utils\VersionControl.
+ * Unit tests for CyberX\Utils\VersionControl.
  *
  * Covered:
  * - versionString() (semantic version format: X.Y.Z)

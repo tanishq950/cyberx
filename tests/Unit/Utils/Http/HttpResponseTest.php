@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils\Http;
 
-use Tirreno\Entities\HttpResponse;
+use CyberX\Entities\HttpResponse;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Tirreno\Entities\HttpResponse
+ * @covers \CyberX\Entities\HttpResponse
  */
 final class HttpResponseTest extends TestCase {
     public function testSuccessResponse(): void {

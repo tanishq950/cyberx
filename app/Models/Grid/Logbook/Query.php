@@ -1,23 +1,23 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Models\Grid\Logbook;
+namespace CyberX\Models\Grid\Logbook;
 
-class Query extends \Tirreno\Models\Grid\Base\Query {
+class Query extends \CyberX\Models\Grid\Base\Query {
     protected ?string $defaultOrder = 'event_logbook.error_type DESC, event_logbook.id DESC';
     protected string $dateRangeField = 'event_logbook.started';
 
@@ -84,12 +84,12 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
         //Add dates into request
         $this->applyDateRange($query, $queryParams);
 
-        $search = \Tirreno\Utils\Conversion::getDictionaryRequestParam('search');
+        $search = \CyberX\Utils\Conversion::getDictionaryRequestParam('search');
         $searchConditions = '';
 
         if (isset($search['value']) && is_string($search['value']) && $search['value'] !== '') {
             $extra = '';
-            if (\Tirreno\Utils\Conversion::filterIp($search['value'])) {
+            if (\CyberX\Utils\Conversion::filterIp($search['value'])) {
                 $extra = ' event_logbook.ip = :search_ip_value OR ';
                 $queryParams[':search_ip_value'] = $search['value'];
             }
@@ -114,8 +114,8 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
 
     protected function applyDateRange(string &$query, array &$queryParams): void {
         // apply server offset to utc requested date range because dateRangeField is in server time zone
-        $serverOffset = \Tirreno\Utils\Timezones::getServerOffset();
-        $dateRange = \Tirreno\Utils\DateRange::getDatesRangeFromRequest($serverOffset);
+        $serverOffset = \CyberX\Utils\Timezones::getServerOffset();
+        $dateRange = \CyberX\Utils\DateRange::getDatesRangeFromRequest($serverOffset);
 
         if ($dateRange) {
             $searchConditions = (

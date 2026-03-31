@@ -1,3 +1,3 @@
 # Authors
 
-- Tirreno Technologies Sàrl
+- Tanishq Mohite

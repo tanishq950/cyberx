@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class B01 extends \Tirreno\Assets\Rule {
+class B01 extends \CyberX\Assets\Rule {
     public const NAME = 'Multiple countries';
     public const DESCRIPTION = 'IP addresses are located in diverse countries, which is a rare behaviour for regular users.';
     public const ATTRIBUTES = ['ip'];

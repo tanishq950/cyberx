@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E05 extends \Tirreno\Assets\Rule {
+class E05 extends \CyberX\Assets\Rule {
     public const NAME = 'Special characters in email';
     public const DESCRIPTION = 'The email address features an unusually high number of special characters, which is atypical for standard email addresses.';
     public const ATTRIBUTES = [];

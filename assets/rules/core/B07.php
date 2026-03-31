@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class B07 extends \Tirreno\Assets\Rule {
+class B07 extends \CyberX\Assets\Rule {
     public const NAME = 'User\'s full name contains digits';
     public const DESCRIPTION = 'Full name contains digits, which is a rare behaviour for regular users.';
     public const ATTRIBUTES = [];

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\ErrorCodes;
-use Tirreno\Utils\Validators;
+use CyberX\Utils\ErrorCodes;
+use CyberX\Utils\Validators;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Utils\Validators.
+ * Unit tests for CyberX\Utils\Validators.
  *
  * Covered (unit-testable without refactor):
  * - CSRF-only validators (purely depend on Access::CSRFTokenValid + F3 session):

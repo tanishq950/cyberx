@@ -1,23 +1,23 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Controllers\Admin\Search;
+namespace CyberX\Controllers\Admin\Search;
 
-class Data extends \Tirreno\Controllers\Admin\Base\Data {
+class Data extends \CyberX\Controllers\Admin\Base\Data {
     public function getSearchResults(?string $query, int $apiKey): array {
         $result = [];
 
@@ -25,23 +25,23 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
             return ['suggestions' => $result];
         }
 
-        $model = new \Tirreno\Models\Search\Domain();
+        $model = new \CyberX\Models\Search\Domain();
         $result1 = $model->searchByDomain($query, $apiKey);
 
-        $model = new \Tirreno\Models\Search\Ip();
+        $model = new \CyberX\Models\Search\Ip();
         $result2 = $model->searchByIp($query, $apiKey);
 
-        $model = new \Tirreno\Models\Search\Isp();
+        $model = new \CyberX\Models\Search\Isp();
         $result3 = $model->searchByIsp($query, $apiKey);
 
-        $model = new \Tirreno\Models\Search\User();
+        $model = new \CyberX\Models\Search\User();
         $result4 = $model->searchByUserId($query, $apiKey);
         $result5 = $model->searchByName($query, $apiKey);
 
-        $model = new \Tirreno\Models\Search\Email();
+        $model = new \CyberX\Models\Search\Email();
         $result6 = $model->searchByEmail($query, $apiKey);
 
-        $model = new \Tirreno\Models\Search\Phone();
+        $model = new \CyberX\Models\Search\Phone();
         $result7 = $model->searchByPhone($query, $apiKey);
 
         $result = array_merge($result1, $result2, $result3, $result4, $result5, $result6, $result7);

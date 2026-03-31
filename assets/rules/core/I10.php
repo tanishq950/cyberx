@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class I10 extends \Tirreno\Assets\Rule {
+class I10 extends \CyberX\Assets\Rule {
     public const NAME = 'Only residential IPs';
     public const DESCRIPTION = 'User uses only residential IP addresses.';
     public const ATTRIBUTES = ['ip'];

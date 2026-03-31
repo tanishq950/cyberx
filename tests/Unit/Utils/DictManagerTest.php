@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\DictManager;
+use CyberX\Utils\DictManager;
 use PHPUnit\Framework\TestCase;
 use Tests\Support\FakeFilesystem;
 

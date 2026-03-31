@@ -1,44 +1,44 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Controllers\Admin\IP;
+namespace CyberX\Controllers\Admin\IP;
 
-class Data extends \Tirreno\Controllers\Admin\Base\Data {
+class Data extends \CyberX\Controllers\Admin\Base\Data {
     public function proceedPostRequest(): array {
-        return match (\Tirreno\Utils\Conversion::getStringRequestParam('cmd')) {
+        return match (\CyberX\Utils\Conversion::getStringRequestParam('cmd')) {
             'reenrichment' => $this->enrichEntity(),
             default => []
         };
     }
 
     public function enrichEntity(): array {
-        $dataController = new \Tirreno\Controllers\Admin\Enrichment\Data();
-        $apiKey = \Tirreno\Utils\ApiKeys::getCurrentOperatorApiKeyId();
-        $enrichmentKey = \Tirreno\Utils\ApiKeys::getCurrentOperatorEnrichmentKeyString();
+        $dataController = new \CyberX\Controllers\Admin\Enrichment\Data();
+        $apiKey = \CyberX\Utils\ApiKeys::getCurrentOperatorApiKeyId();
+        $enrichmentKey = \CyberX\Utils\ApiKeys::getCurrentOperatorEnrichmentKeyString();
 
-        $type       = \Tirreno\Utils\Conversion::getStringRequestParam('type');
-        $search     = \Tirreno\Utils\Conversion::getStringRequestParam('search', true);
-        $entityId   = \Tirreno\Utils\Conversion::getIntRequestParam('entityId', true);
+        $type       = \CyberX\Utils\Conversion::getStringRequestParam('type');
+        $search     = \CyberX\Utils\Conversion::getStringRequestParam('search', true);
+        $entityId   = \CyberX\Utils\Conversion::getIntRequestParam('entityId', true);
 
         return $dataController->enrichEntity($type, $search, $entityId, $apiKey, $enrichmentKey);
     }
 
     public function checkIfOperatorHasAccess(int $ipId, int $apiKey): bool {
-        return (new \Tirreno\Models\Ip())->checkAccess($ipId, $apiKey);
+        return (new \CyberX\Models\Ip())->checkAccess($ipId, $apiKey);
     }
 
     public function getIpDetails(int $ipId, int $apiKey): array {
@@ -61,14 +61,14 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
     }
 
     public function getFullIpInfoById(int $ipId, int $apiKey): array {
-        $model = new \Tirreno\Models\Ip();
+        $model = new \CyberX\Models\Ip();
         $result = $model->getFullIpInfoById($ipId, $apiKey);
-        $result['lastseen'] = \Tirreno\Utils\ElapsedDate::short($result['lastseen']);
+        $result['lastseen'] = \CyberX\Utils\ElapsedDate::short($result['lastseen']);
 
         return $result;
     }
 
     public function isEnrichable(int $apiKey): bool {
-        return (new \Tirreno\Models\ApiKeys())->attributeIsEnrichable('ip', $apiKey);
+        return (new \CyberX\Models\ApiKeys())->attributeIsEnrichable('ip', $apiKey);
     }
 }

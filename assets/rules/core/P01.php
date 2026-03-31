@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class P01 extends \Tirreno\Assets\Rule {
+class P01 extends \CyberX\Assets\Rule {
     public const NAME = 'Invalid phone format';
     public const DESCRIPTION = 'User provided incorrect phone number.';
     public const ATTRIBUTES = ['phone'];

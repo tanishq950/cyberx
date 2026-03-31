@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class B06 extends \Tirreno\Assets\Rule {
+class B06 extends \CyberX\Assets\Rule {
     public const NAME = 'Potentially vulnerable URL';
     public const DESCRIPTION = 'The user made a request to suspicious URL.';
     public const ATTRIBUTES = [];

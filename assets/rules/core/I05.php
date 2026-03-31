@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class I05 extends \Tirreno\Assets\Rule {
+class I05 extends \CyberX\Assets\Rule {
     public const NAME = 'IP belongs to commercial VPN';
     public const DESCRIPTION = 'User tries to hide their real location or bypass regional blocking.';
     public const ATTRIBUTES = ['ip'];

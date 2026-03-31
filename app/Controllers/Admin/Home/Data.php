@@ -1,25 +1,25 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Controllers\Admin\Home;
+namespace CyberX\Controllers\Admin\Home;
 
-class Data extends \Tirreno\Controllers\Admin\Base\Data {
+class Data extends \CyberX\Controllers\Admin\Base\Data {
     public function getChart(string $mode, int $apiKey): array {
-        $modelMap = \Tirreno\Utils\Constants::get()->CHART_MODEL_MAP;
+        $modelMap = \CyberX\Utils\Constants::get()->CHART_MODEL_MAP;
 
         $model = array_key_exists($mode, $modelMap) ? new $modelMap[$mode]() : null;
 
@@ -27,7 +27,7 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
     }
 
     public function getStat(string $mode, ?array $dateRange, int $apiKey): array {
-        $model = new \Tirreno\Models\Dashboard();
+        $model = new \CyberX\Models\Dashboard();
 
         $result = [
             'total'         => null,
@@ -69,7 +69,7 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
     }
 
     public function getTopTen(string $mode, ?array $dateRange, int $apiKey): array {
-        $modelMap = \Tirreno\Utils\Constants::get()->TOP_TEN_MODELS_MAP;
+        $modelMap = \CyberX\Utils\Constants::get()->TOP_TEN_MODELS_MAP;
 
         $model = array_key_exists($mode, $modelMap) ? new $modelMap[$mode]() : null;
         $data = $model ? $model->getList($apiKey, $dateRange) : [];
@@ -83,13 +83,13 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
         ];
     }
 
-    public function getCurrentTime(\Tirreno\Entities\Operator $operator): array {
-        $offset = \Tirreno\Utils\Timezones::getOperatorOffset($operator);
+    public function getCurrentTime(\CyberX\Entities\Operator $operator): array {
+        $offset = \CyberX\Utils\Timezones::getOperatorOffset($operator);
         $now = time() + $offset;
-        $day = \Tirreno\Utils\Constants::get()->SECONDS_IN_DAY;
+        $day = \CyberX\Utils\Constants::get()->SECONDS_IN_DAY;
         $firstJan = mktime(0, 0, 0, 1, 1, intval(gmdate('Y')));
 
-        $day = \Tirreno\Utils\Conversion::intVal(ceil(($now - $firstJan) / $day), 0);
+        $day = \CyberX\Utils\Conversion::intVal(ceil(($now - $firstJan) / $day), 0);
 
         return [
             'clock_offset'      => $offset,
@@ -100,7 +100,7 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
     }
 
     public function getConstants(): array {
-        $constants = \Tirreno\Utils\Assets\ConstantsClass::getConstantsObj();
+        $constants = \CyberX\Utils\Assets\ConstantsClass::getConstantsObj();
 
         return $constants ? $constants::listConstants() : [];
     }

@@ -1,31 +1,31 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Utils\Http;
+namespace CyberX\Utils\Http;
 
-final class CurlTransport implements \Tirreno\Interfaces\HttpTransportInterface {
+final class CurlTransport implements \CyberX\Interfaces\HttpTransportInterface {
     public function isAvailable(): bool {
         return function_exists('curl_init');
     }
 
-    public function request(\Tirreno\Entities\HttpRequest $request): \Tirreno\Entities\HttpResponse {
+    public function request(\CyberX\Entities\HttpRequest $request): \CyberX\Entities\HttpResponse {
         $ch = curl_init($request->url());
         if ($ch === false) {
-            $result = \Tirreno\Entities\HttpResponse::failure(null, 'curl_init_failed', []);
+            $result = \CyberX\Entities\HttpResponse::failure(null, 'curl_init_failed', []);
 
             return $result;
         }
@@ -66,19 +66,19 @@ final class CurlTransport implements \Tirreno\Interfaces\HttpTransportInterface 
             $error = strval(curl_error($ch));
             curl_close($ch);
 
-            return \Tirreno\Entities\HttpResponse::failure($code, $error, []);
+            return \CyberX\Entities\HttpResponse::failure($code, $error, []);
         }
 
         curl_close($ch);
 
         if ($raw === false) {
-            $result = \Tirreno\Entities\HttpResponse::failure($code, 'curl_exec_failed', []);
+            $result = \CyberX\Entities\HttpResponse::failure($code, 'curl_exec_failed', []);
 
             return $result;
         }
 
         $bodyString = strval($raw);
-        $result = \Tirreno\Entities\HttpResponse::success($code, $bodyString, []);
+        $result = \CyberX\Entities\HttpResponse::success($code, $bodyString, []);
 
         return $result;
     }

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\Access;
-use Tirreno\Utils\ErrorCodes;
+use CyberX\Utils\Access;
+use CyberX\Utils\ErrorCodes;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Utils\Access.
+ * Unit tests for CyberX\Utils\Access.
  *
  * Covered (unit-testable without refactor):
  * - Access::CSRFTokenValid()

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\Assets\RulesClasses;
+use CyberX\Utils\Assets\RulesClasses;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Utils\Assets\RulesClasses.
+ * Unit tests for CyberX\Utils\Assets\RulesClasses.
  *
  * Covered (unit-testable without refactor):
  * - RulesClasses::getRuleClass() (pure mapping + broken override)

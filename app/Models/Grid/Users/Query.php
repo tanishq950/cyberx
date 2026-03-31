@@ -1,23 +1,23 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Models\Grid\Users;
+namespace CyberX\Models\Grid\Users;
 
-class Query extends \Tirreno\Models\Grid\Base\Query {
+class Query extends \CyberX\Models\Grid\Base\Query {
     protected ?string $defaultOrder = 'event_account.id DESC';
     protected string $dateRangeField = 'event_account.lastseen';
 
@@ -100,7 +100,7 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
     private function applySearch(string &$query, array &$queryParams): void {
         $this->applyDateRange($query, $queryParams);
 
-        $search = \Tirreno\Utils\Conversion::getDictionaryRequestParam('search');
+        $search = \CyberX\Utils\Conversion::getDictionaryRequestParam('search');
         $searchConditions = $this->injectIdQuery('event_account.id', $queryParams);
 
         if (isset($search['value']) && is_string($search['value']) && $search['value'] !== '') {
@@ -120,7 +120,7 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
             );
 
             $queryParams[':search_value'] = '%' . $search['value'] . '%';
-            $queryParams[':offset'] = strval(\Tirreno\Utils\Timezones::getCurrentOperatorOffset());
+            $queryParams[':offset'] = strval(\CyberX\Utils\Timezones::getCurrentOperatorOffset());
         }
 
         //Add search and ids into request
@@ -128,7 +128,7 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
     }
 
     private function applyRules(string &$query, array &$queryParams): void {
-        $ruleUids = \Tirreno\Utils\Conversion::getArrayRequestParam('ruleUids');
+        $ruleUids = \CyberX\Utils\Conversion::getArrayRequestParam('ruleUids');
         if (!$ruleUids) {
             return;
         }
@@ -143,7 +143,7 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
     }
 
     private function applyScore(string &$query, array &$queryParams): void {
-        $scoresRanges = \Tirreno\Utils\Conversion::getArrayRequestParam('scoresRange');
+        $scoresRanges = \CyberX\Utils\Conversion::getArrayRequestParam('scoresRange');
         if (!$scoresRanges) {
             return;
         }
@@ -151,7 +151,7 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
         $clauses = [];
         foreach ($scoresRanges as $key => $scoreBase) {
             $clauses[] = sprintf('event_account.score >= :score_base_%s AND event_account.score <= :score_base_%s + 10', $key, $key);
-            $queryParams[':score_base_' . $key] = \Tirreno\Utils\Conversion::intValCheckEmpty($scoreBase, 0);
+            $queryParams[':score_base_' . $key] = \CyberX\Utils\Conversion::intValCheckEmpty($scoreBase, 0);
         }
 
         $query .= ' AND (' . implode(' OR ', $clauses) . ')';

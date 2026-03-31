@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class B02 extends \Tirreno\Assets\Rule {
+class B02 extends \CyberX\Assets\Rule {
     public const NAME = 'User has changed a password';
     public const DESCRIPTION = 'The user has changed their password.';
     public const ATTRIBUTES = [];

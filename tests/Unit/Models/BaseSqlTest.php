@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Models;
 
-use Tirreno\Models\BaseSql;
+use CyberX\Models\BaseSql;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Models\BaseSql.
+ * Unit tests for CyberX\Models\BaseSql.
  *
  * Covered (unit-testable without refactor):
  * - getArrayPlaceholders():

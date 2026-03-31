@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils\Http;
 
-use Tirreno\Entities\HttpRequest;
+use CyberX\Entities\HttpRequest;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Tirreno\Entities\HttpRequest
+ * @covers \CyberX\Entities\HttpRequest
  */
 final class HttpRequestTest extends TestCase {
     public function testGettersReturnConstructorValues(): void {

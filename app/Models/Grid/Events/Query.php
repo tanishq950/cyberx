@@ -1,23 +1,23 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Models\Grid\Events;
+namespace CyberX\Models\Grid\Events;
 
-class Query extends \Tirreno\Models\Grid\Base\Query {
+class Query extends \CyberX\Models\Grid\Base\Query {
     protected ?string $defaultOrder = 'event.time DESC, event.id DESC';
     protected string $dateRangeField = 'event.time';
 
@@ -220,7 +220,7 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
         //Apply itemId into request
         $this->applyRelatedToIdSearchConitions($query);
 
-        $search = \Tirreno\Utils\Conversion::getDictionaryRequestParam('search');
+        $search = \CyberX\Utils\Conversion::getDictionaryRequestParam('search');
         $searchConditions = '';
 
         // WARN only for field_id filter
@@ -237,7 +237,7 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
         }
 
         if (isset($search['value']) && is_string($search['value']) && $search['value'] !== '') {
-            if (\Tirreno\Utils\Conversion::filterIp($search['value'])) {
+            if (\CyberX\Utils\Conversion::filterIp($search['value'])) {
                 $searchConditions .= (
                     ' AND
                     (
@@ -265,7 +265,7 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
                 );
 
                 $queryParams[':search_value'] = '%' . $search['value'] . '%';
-                $queryParams[':offset'] = strval(\Tirreno\Utils\Timezones::getCurrentOperatorOffset());
+                $queryParams[':offset'] = strval(\CyberX\Utils\Timezones::getCurrentOperatorOffset());
             }
         }
 
@@ -321,7 +321,7 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
     }
 
     private function applyEventTypes(string &$query, array &$queryParams): void {
-        $eventTypeIds = \Tirreno\Utils\Conversion::getArrayRequestParam('eventTypeIds');
+        $eventTypeIds = \CyberX\Utils\Conversion::getArrayRequestParam('eventTypeIds');
         if (!$eventTypeIds) {
             return;
         }
@@ -336,7 +336,7 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
     }
 
     private function applyDeviceTypes(string &$query, array &$queryParams): void {
-        $deviceTypes = \Tirreno\Utils\Conversion::getArrayRequestParam('deviceTypes');
+        $deviceTypes = \CyberX\Utils\Conversion::getArrayRequestParam('deviceTypes');
         if (!$deviceTypes) {
             return;
         }
@@ -346,7 +346,7 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
             if ($deviceType === 'other') {
                 $placeholders = [];
 
-                foreach (\Tirreno\Utils\Constants::get()->DEVICE_TYPES as $device) {
+                foreach (\CyberX\Utils\Constants::get()->DEVICE_TYPES as $device) {
                     if ($device !== 'unknown' && $device !== 'other') {
                         $param = ':device_exclude_' . $device;
                         $placeholders[] = $param;
@@ -370,7 +370,7 @@ class Query extends \Tirreno\Models\Grid\Base\Query {
     }
 
     private function applyRules(string &$query, array &$queryParams): void {
-        $ruleUids = \Tirreno\Utils\Conversion::getArrayRequestParam('ruleUids');
+        $ruleUids = \CyberX\Utils\Conversion::getArrayRequestParam('ruleUids');
         if (!$ruleUids) {
             return;
         }

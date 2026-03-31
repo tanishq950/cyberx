@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\ApiResponseFormats;
+use CyberX\Utils\ApiResponseFormats;
 use PHPUnit\Framework\TestCase;
 
 final class ApiResponseFormatsTest extends TestCase {

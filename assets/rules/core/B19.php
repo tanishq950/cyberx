@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class B19 extends \Tirreno\Assets\Rule {
+class B19 extends \CyberX\Assets\Rule {
     public const NAME = 'Night time requests';
     public const DESCRIPTION = 'User was active from midnight till 5 a. m.';
     public const ATTRIBUTES = [];

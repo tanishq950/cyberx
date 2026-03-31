@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E06 extends \Tirreno\Assets\Rule {
+class E06 extends \CyberX\Assets\Rule {
     public const NAME = 'Consecutive digits in email';
     public const DESCRIPTION = 'The email address includes at least two consecutive digits, which is a characteristic sometimes associated with temporary or fake email accounts.';
     public const ATTRIBUTES = [];

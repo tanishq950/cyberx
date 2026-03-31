@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E27 extends \Tirreno\Assets\Rule {
+class E27 extends \CyberX\Assets\Rule {
     public const NAME = 'Email breaches';
     public const DESCRIPTION = 'Email appears in data breaches.';
     public const ATTRIBUTES = ['email'];

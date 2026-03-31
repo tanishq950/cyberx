@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\ApiKeys;
+use CyberX\Utils\ApiKeys;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Utils\ApiKeys.
+ * Unit tests for CyberX\Utils\ApiKeys.
  *
  * Covered (unit-testable without refactor):
  * - ApiKeys::getCurrentOperatorApiKeyId() returns null when current operator is missing

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\ElapsedDate;
+use CyberX\Utils\ElapsedDate;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Utils\ElapsedDate.
+ * Unit tests for CyberX\Utils\ElapsedDate.
  *
  * Covered (unit-testable without refactor):
  * - short(): formats non-null input as "d/m/Y H:i:s"; returns null for null

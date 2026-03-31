@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Support\Utils\Lists;
 
-use Tirreno\Utils\Assets\Lists\Base;
+use CyberX\Utils\Assets\Lists\Base;
 
 /**
  * Concrete stub for testing Base logic (no filesystem).

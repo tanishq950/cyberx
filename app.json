@@ -1,11 +1,11 @@
 {
-    "name": "tirreno",
+    "name": "cyberx",
     "description": "Open security framework. Understand, monitor, and protect your application from cyber threats, account takeovers, and abuse.",
     "website": "https://www.tirreno.com",
-    "repository": "https://github.com/tirrenotechnologies/tirreno",
-    "logo": "https://www.tirreno.com/tirreno-logo-public.png",
+    "repository": "https://github.com/cyberxtechnologies/cyberx",
+    "logo": "https://www.tirreno.com/cyberx-logo-public.png",
     "keywords": [
-        "tirreno",
+        "cyberx",
         "fraud-detection",
         "audit-trail",
         "analytics",

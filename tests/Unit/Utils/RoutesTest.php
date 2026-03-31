@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\Routes;
+use CyberX\Utils\Routes;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Utils\Routes.
+ * Unit tests for CyberX\Utils\Routes.
  *
  * Covered (unit-testable without refactor):
  * - Routes::getCurrentRequestOperator():

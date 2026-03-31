@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E17 extends \Tirreno\Assets\Rule {
+class E17 extends \CyberX\Assets\Rule {
     public const NAME = 'Free email and spam';
     public const DESCRIPTION = 'Email appears in spam lists and registered by free provider. Increased risk of spamming.';
     public const ATTRIBUTES = ['email', 'domain'];

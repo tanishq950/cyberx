@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\Conversion;
+use CyberX\Utils\Conversion;
 use Base;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Utils\Conversion.
+ * Unit tests for CyberX\Utils\Conversion.
  *
  * These tests focus on behavior and edge cases:
  * - intVal() normalization + validation + fallbacks

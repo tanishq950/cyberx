@@ -1,21 +1,21 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Utils;
+namespace CyberX\Utils;
 
 class Constants {
     private static array $instances = [];
@@ -160,7 +160,7 @@ class Constants {
     protected string $MAIL_HOST      = 'smtp.eu.mailgun.org';
     protected string $MAIL_SEND_BIN  = '/usr/sbin/sendmail';
 
-    protected string $PAGE_TITLE_POSTFIX = '| tirreno';
+    protected string $PAGE_TITLE_POSTFIX = '| cyberx';
 
     protected int $PAGE_VIEW_EVENT_TYPE_ID = 1;
     protected int $PAGE_EDIT_EVENT_TYPE_ID = 2;
@@ -177,28 +177,28 @@ class Constants {
     protected int $FIELD_EDIT_EVENT_TYPE_ID = 13;
 
     protected array $CHART_MODEL_MAP = [
-        'resources'         => \Tirreno\Models\Chart\Resources::class,
-        'resource'          => \Tirreno\Models\Chart\Resource::class,
-        'users'             => \Tirreno\Models\Chart\Users::class,
-        'user'              => \Tirreno\Models\Chart\User::class,
-        'isps'              => \Tirreno\Models\Chart\Isps::class,
-        'isp'               => \Tirreno\Models\Chart\Isp::class,
-        'ips'               => \Tirreno\Models\Chart\Ips::class,
-        'ip'                => \Tirreno\Models\Chart\Ip::class,
-        'domains'           => \Tirreno\Models\Chart\Domains::class,
-        'domain'            => \Tirreno\Models\Chart\Domain::class,
-        'userAgents'        => \Tirreno\Models\Chart\UserAgents::class,
-        'userAgent'         => \Tirreno\Models\Chart\UserAgent::class,
-        'events'            => \Tirreno\Models\Chart\Events::class,
-        'emails'            => \Tirreno\Models\Chart\Emails::class,
-        'phones'            => \Tirreno\Models\Chart\Phones::class,
-        'review-queue'      => \Tirreno\Models\Chart\ReviewQueue::class,
-        'country'           => \Tirreno\Models\Chart\Country::class,
-        'blacklist'         => \Tirreno\Models\Chart\Blacklist::class,
-        'logbook'           => \Tirreno\Models\Chart\Logbook::class,
-        'stats'             => \Tirreno\Models\Chart\SessionStat::class,
-        'fields'            => \Tirreno\Models\Chart\FieldAuditTrails::class,
-        'field'             => \Tirreno\Models\Chart\FieldAuditTrail::class,
+        'resources'         => \CyberX\Models\Chart\Resources::class,
+        'resource'          => \CyberX\Models\Chart\Resource::class,
+        'users'             => \CyberX\Models\Chart\Users::class,
+        'user'              => \CyberX\Models\Chart\User::class,
+        'isps'              => \CyberX\Models\Chart\Isps::class,
+        'isp'               => \CyberX\Models\Chart\Isp::class,
+        'ips'               => \CyberX\Models\Chart\Ips::class,
+        'ip'                => \CyberX\Models\Chart\Ip::class,
+        'domains'           => \CyberX\Models\Chart\Domains::class,
+        'domain'            => \CyberX\Models\Chart\Domain::class,
+        'userAgents'        => \CyberX\Models\Chart\UserAgents::class,
+        'userAgent'         => \CyberX\Models\Chart\UserAgent::class,
+        'events'            => \CyberX\Models\Chart\Events::class,
+        'emails'            => \CyberX\Models\Chart\Emails::class,
+        'phones'            => \CyberX\Models\Chart\Phones::class,
+        'review-queue'      => \CyberX\Models\Chart\ReviewQueue::class,
+        'country'           => \CyberX\Models\Chart\Country::class,
+        'blacklist'         => \CyberX\Models\Chart\Blacklist::class,
+        'logbook'           => \CyberX\Models\Chart\Logbook::class,
+        'stats'             => \CyberX\Models\Chart\SessionStat::class,
+        'fields'            => \CyberX\Models\Chart\FieldAuditTrails::class,
+        'field'             => \CyberX\Models\Chart\FieldAuditTrail::class,
     ];
 
     protected array $LINE_CHARTS = [
@@ -224,36 +224,36 @@ class Constants {
     ];
 
     protected array $TOP_TEN_MODELS_MAP = [
-        'mostActiveUsers'           => \Tirreno\Models\TopTen\UsersByEvents::class,
-        'mostActiveCountries'       => \Tirreno\Models\TopTen\CountriesByUsers::class,
-        'mostActiveUrls'            => \Tirreno\Models\TopTen\ResourcesByUsers::class,
-        'ipsWithTheMostUsers'       => \Tirreno\Models\TopTen\IpsByUsers::class,
-        'usersWithMostLoginFail'    => \Tirreno\Models\TopTen\UsersByLoginFail::class,
-        'usersWithMostIps'          => \Tirreno\Models\TopTen\UsersByIps::class,
+        'mostActiveUsers'           => \CyberX\Models\TopTen\UsersByEvents::class,
+        'mostActiveCountries'       => \CyberX\Models\TopTen\CountriesByUsers::class,
+        'mostActiveUrls'            => \CyberX\Models\TopTen\ResourcesByUsers::class,
+        'ipsWithTheMostUsers'       => \CyberX\Models\TopTen\IpsByUsers::class,
+        'usersWithMostLoginFail'    => \CyberX\Models\TopTen\UsersByLoginFail::class,
+        'usersWithMostIps'          => \CyberX\Models\TopTen\UsersByIps::class,
     ];
 
     protected array $RULES_TOTALS_MODELS = [
-        \Tirreno\Models\Phone::class,
-        \Tirreno\Models\Ip::class,
-        \Tirreno\Models\Session::class,
-        \Tirreno\Models\User::class,
+        \CyberX\Models\Phone::class,
+        \CyberX\Models\Ip::class,
+        \CyberX\Models\Session::class,
+        \CyberX\Models\User::class,
     ];
 
     protected array $REST_TOTALS_MODELS = [
-        'isp'       => \Tirreno\Models\Isp::class,
-        'resource'  => \Tirreno\Models\Resource::class,
-        'domain'    => \Tirreno\Models\Domain::class,
-        'device'    => \Tirreno\Models\Device::class,
-        'country'   => \Tirreno\Models\Country::class,
-        'field'     => \Tirreno\Models\FieldAudit::class,
+        'isp'       => \CyberX\Models\Isp::class,
+        'resource'  => \CyberX\Models\Resource::class,
+        'domain'    => \CyberX\Models\Domain::class,
+        'device'    => \CyberX\Models\Device::class,
+        'country'   => \CyberX\Models\Country::class,
+        'field'     => \CyberX\Models\FieldAudit::class,
     ];
 
     protected array $ENRICHING_ATTRIBUTES = [
-        'ip'        => \Tirreno\Models\Ip::class,
-        'email'     => \Tirreno\Models\Email::class,
-        'domain'    => \Tirreno\Models\Domain::class,
-        'phone'     => \Tirreno\Models\Phone::class,
-        //'ua'        => \Tirreno\Models\Device::class,
+        'ip'        => \CyberX\Models\Ip::class,
+        'email'     => \CyberX\Models\Email::class,
+        'domain'    => \CyberX\Models\Domain::class,
+        'phone'     => \CyberX\Models\Phone::class,
+        //'ua'        => \CyberX\Models\Device::class,
     ];
 
     protected array $ADMIN_PAGES = [

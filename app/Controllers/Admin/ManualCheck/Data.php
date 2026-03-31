@@ -1,23 +1,23 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Controllers\Admin\ManualCheck;
+namespace CyberX\Controllers\Admin\ManualCheck;
 
-class Data extends \Tirreno\Controllers\Admin\Base\Data {
+class Data extends \CyberX\Controllers\Admin\Base\Data {
     public function proceedPostRequest(): array {
         return $this->performSearch();
     }
@@ -29,9 +29,9 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
             'SEARCH_VALUES' => $params,
         ];
 
-        $apiKey = \Tirreno\Utils\ApiKeys::getCurrentOperatorApiKeyId();
-        $enrichmentKey = \Tirreno\Utils\ApiKeys::getCurrentOperatorEnrichmentKeyString();
-        $errorCode = \Tirreno\Utils\Validators::validateSearch($params, $enrichmentKey);
+        $apiKey = \CyberX\Utils\ApiKeys::getCurrentOperatorApiKeyId();
+        $enrichmentKey = \CyberX\Utils\ApiKeys::getCurrentOperatorEnrichmentKeyString();
+        $errorCode = \CyberX\Utils\Validators::validateSearch($params, $enrichmentKey);
 
         if ($errorCode) {
             $pageParams['ERROR_CODE'] = $errorCode;
@@ -39,10 +39,10 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
             return $pageParams;
         }
 
-        $type   = \Tirreno\Utils\Conversion::getStringRequestParam('type');
-        $search = \Tirreno\Utils\Conversion::getStringRequestParam('search');
+        $type   = \CyberX\Utils\Conversion::getStringRequestParam('type');
+        $search = \CyberX\Utils\Conversion::getStringRequestParam('search');
 
-        $controller = new \Tirreno\Controllers\Admin\Enrichment\Data();
+        $controller = new \CyberX\Controllers\Admin\Enrichment\Data();
         $result = $controller->enrichEntity($type, $search, null, $apiKey, $enrichmentKey);
 
         if (isset($result['ERROR_CODE'])) {
@@ -51,7 +51,7 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
             return $pageParams;
         }
 
-        $operatorId = \Tirreno\Utils\Routes::getCurrentRequestOperator()->id;
+        $operatorId = \CyberX\Utils\Routes::getCurrentRequestOperator()->id;
         $this->saveSearch($search, $type, $operatorId);
 
         // TODO: return alert_list back in next release
@@ -74,12 +74,12 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
     }
 
     private function saveSearch(string $query, string $type, int $operatorId): void {
-        $history = new \Tirreno\Models\ManualCheckHistory();
+        $history = new \CyberX\Models\ManualCheckHistory();
         $history->insertRecord($query, $type, $operatorId);
     }
 
     public function getSearchHistory(int $operatorId): ?array {
-        $model = new \Tirreno\Models\ManualCheckHistory();
+        $model = new \CyberX\Models\ManualCheckHistory();
 
         return $model->getLastByOperatorId($operatorId);
     }

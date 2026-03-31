@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class D06 extends \Tirreno\Assets\Rule {
+class D06 extends \CyberX\Assets\Rule {
     public const NAME = 'Multiple devices per user';
     public const DESCRIPTION = 'User accesses the account using multiple devices. Account may be used by different people.';
     public const ATTRIBUTES = [];

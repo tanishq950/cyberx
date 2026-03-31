@@ -1,23 +1,23 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Models\Chart;
+namespace CyberX\Models\Chart;
 
-abstract class Base extends \Tirreno\Models\BaseSql {
+abstract class Base extends \CyberX\Models\BaseSql {
     protected function concatDataLines(array $data1, string $field1, array $data2, string $field2, array $data3 = [], ?string $field3 = null): array {
         $data0 = [];
         $iters = count($data1);
@@ -77,7 +77,7 @@ abstract class Base extends \Tirreno\Models\BaseSql {
         }
 
         // TODO: tmp order troubles fix
-        usort($data0, [\Tirreno\Utils\Sort::class, 'cmpTimestamp']);
+        usort($data0, [\CyberX\Utils\Sort::class, 'cmpTimestamp']);
 
         return $data0;
     }
@@ -86,14 +86,14 @@ abstract class Base extends \Tirreno\Models\BaseSql {
         $cnt = count($params);
         $data = array_fill(0, $cnt, []);
 
-        $step = \Tirreno\Utils\Constants::get()->CHART_RESOLUTION[\Tirreno\Utils\DateRange::getResolutionFromRequest()];
+        $step = \CyberX\Utils\Constants::get()->CHART_RESOLUTION[\CyberX\Utils\DateRange::getResolutionFromRequest()];
         // use offset shift because $startTs/$endTs compared with shifted ['ts']
-        $offset = \Tirreno\Utils\Timezones::getCurrentOperatorOffset();
-        $dateRange = \Tirreno\Utils\DateRange::getDatesRangeFromRequest($offset);
+        $offset = \CyberX\Utils\Timezones::getCurrentOperatorOffset();
+        $dateRange = \CyberX\Utils\DateRange::getDatesRangeFromRequest($offset);
 
         if (!$dateRange) {
             $now = time() + $offset;
-            $week = \Tirreno\Utils\Constants::get()->SECONDS_IN_WEEK;
+            $week = \CyberX\Utils\Constants::get()->SECONDS_IN_WEEK;
             if (count($params[0]) === 0) {
                 $dateRange = [
                     'endDate' => date('Y-m-d H:i:s', $now),
@@ -133,7 +133,7 @@ abstract class Base extends \Tirreno\Models\BaseSql {
 
     protected function execute(string $query, int $apiKey): array {
         // do not use offset because :start_time/:end_time compared with UTC db timestamps
-        $dateRange = \Tirreno\Utils\DateRange::getDatesRangeFromRequest();
+        $dateRange = \CyberX\Utils\DateRange::getDatesRangeFromRequest();
 
         // Search request does not contain daterange param
         if (!$dateRange) {
@@ -143,13 +143,13 @@ abstract class Base extends \Tirreno\Models\BaseSql {
             ];
         }
 
-        $offset = \Tirreno\Utils\Timezones::getCurrentOperatorOffset();
+        $offset = \CyberX\Utils\Timezones::getCurrentOperatorOffset();
 
         $params = [
             ':api_key'      => $apiKey,
             ':end_time'     => $dateRange['endDate'],
             ':start_time'   => $dateRange['startDate'],
-            ':resolution'   => \Tirreno\Utils\DateRange::getResolutionFromRequest(),
+            ':resolution'   => \CyberX\Utils\DateRange::getResolutionFromRequest(),
             ':offset'       => strval($offset),     // str for postgres
         ];
 

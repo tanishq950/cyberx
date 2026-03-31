@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E16 extends \Tirreno\Assets\Rule {
+class E16 extends \CyberX\Assets\Rule {
     public const NAME = 'Domain appears in spam lists';
     public const DESCRIPTION = 'Email appears in spam lists, so the user may have spammed before.';
     public const ATTRIBUTES = ['domain'];

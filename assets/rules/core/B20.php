@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class B20 extends \Tirreno\Assets\Rule {
+class B20 extends \CyberX\Assets\Rule {
     public const NAME = 'Multiple countries in one session';
     public const DESCRIPTION = 'User\'s country was changed in less than 30 minutes.';
     public const ATTRIBUTES = ['ip'];

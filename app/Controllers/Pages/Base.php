@@ -1,21 +1,21 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Controllers\Pages;
+namespace CyberX\Controllers\Pages;
 
 abstract class Base {
     protected \Base $f3;
@@ -31,7 +31,7 @@ abstract class Base {
 
         $this->f3->set('CSRF', $this->f3->get('SESSION.csrf'));
 
-        \Tirreno\Utils\Routes::callExtra('PAGE_BASE');
+        \CyberX\Utils\Routes::callExtra('PAGE_BASE');
     }
 
     public function isPostRequest(): bool {
@@ -46,9 +46,9 @@ abstract class Base {
     }
 
     public function getInternalPageTitleWithPostfix(string $title): string {
-        $title = $title ? $title : \Tirreno\Utils\Constants::get()->UNAUTHORIZED_USERID;
+        $title = $title ? $title : \CyberX\Utils\Constants::get()->UNAUTHORIZED_USERID;
         $safeTitle = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
-        $title = sprintf('%s %s', $safeTitle, \Tirreno\Utils\Constants::get()->PAGE_TITLE_POSTFIX);
+        $title = sprintf('%s %s', $safeTitle, \CyberX\Utils\Constants::get()->PAGE_TITLE_POSTFIX);
 
         return $title;
     }
@@ -62,7 +62,7 @@ abstract class Base {
 
     public function applyPageParams(array $params): array {
         $time = gmdate('Y-m-d H:i:s');
-        \Tirreno\Utils\Timezones::localizeForActiveOperator($time);
+        \CyberX\Utils\Timezones::localizeForActiveOperator($time);
 
         $errorCode = $params['ERROR_CODE'] ?? null;
         $successCode = $params['SUCCESS_CODE'] ?? null;
@@ -97,22 +97,22 @@ abstract class Base {
             $params['SUCCESS_MESSAGE_TIMESTAMP'] = $time;
         }
 
-        $currentOperator = \Tirreno\Utils\Routes::getCurrentRequestOperator();
+        $currentOperator = \CyberX\Utils\Routes::getCurrentRequestOperator();
         if ($currentOperator) {
             $cnt = $currentOperator->reviewQueueCnt ?? 0;
-            $params['NUMBER_OF_NOT_REVIEWED_USERS'] = \Tirreno\Utils\Conversion::formatKiloValue($cnt);
+            $params['NUMBER_OF_NOT_REVIEWED_USERS'] = \CyberX\Utils\Conversion::formatKiloValue($cnt);
 
             $cnt = $currentOperator->blacklistUsersCnt ?? 0;
-            $params['NUMBER_OF_BLACKLIST_USERS'] = \Tirreno\Utils\Conversion::formatKiloValue($cnt);
+            $params['NUMBER_OF_BLACKLIST_USERS'] = \CyberX\Utils\Conversion::formatKiloValue($cnt);
 
-            $controller = new \Tirreno\Controllers\Admin\Home\Data();
+            $controller = new \CyberX\Controllers\Admin\Home\Data();
             $params += $controller->getCurrentTime($currentOperator);
         }
 
-        $params['ALLOW_EMAIL_PHONE'] = \Tirreno\Utils\Variables::getEmailPhoneAllowed();
+        $params['ALLOW_EMAIL_PHONE'] = \CyberX\Utils\Variables::getEmailPhoneAllowed();
 
         $page = $this->page;
-        \Tirreno\Utils\DictManager::load($page);
+        \CyberX\Utils\DictManager::load($page);
 
         $code = $this->f3->get('SESSION.extra_message_code');
         if ($code !== null) {
@@ -128,7 +128,7 @@ abstract class Base {
             ];
         }
 
-        $params = \Tirreno\Utils\Routes::callExtra('APPLY_PAGE_PARAMS', $params, $page) ?? $params;
+        $params = \CyberX\Utils\Routes::callExtra('APPLY_PAGE_PARAMS', $params, $page) ?? $params;
 
         return $params;
     }

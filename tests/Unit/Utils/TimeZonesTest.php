@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\Timezones;
+use CyberX\Utils\Timezones;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Utils\Timezones.
+ * Unit tests for CyberX\Utils\Timezones.
  *
  * Covered (unit-testable without refactor):
  * - Timezones::getTimezone() (valid/invalid fallback behavior)

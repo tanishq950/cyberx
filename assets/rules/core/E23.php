@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E23 extends \Tirreno\Assets\Rule {
+class E23 extends \CyberX\Assets\Rule {
     public const NAME = 'Educational domain (.edu)';
     public const DESCRIPTION = 'Email belongs to educational domain.';
     public const ATTRIBUTES = [];

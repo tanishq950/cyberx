@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\Variables;
+use CyberX\Utils\Variables;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Utils\Variables.
+ * Unit tests for CyberX\Utils\Variables.
  *
  * Covered (unit-testable without refactor):
  * - env > F3 precedence for scalar getters:

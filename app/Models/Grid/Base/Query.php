@@ -1,21 +1,21 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Models\Grid\Base;
+namespace CyberX\Models\Grid\Base;
 
 class Query {
     protected ?\Base $f3 = null;
@@ -45,8 +45,8 @@ class Query {
     }
 
     protected function applyOrder(string &$query): void {
-        $order = \Tirreno\Utils\Conversion::getArrayRequestParam('order');
-        $columns = \Tirreno\Utils\Conversion::getArrayRequestParam('columns');
+        $order = \CyberX\Utils\Conversion::getArrayRequestParam('order');
+        $columns = \CyberX\Utils\Conversion::getArrayRequestParam('columns');
 
         $orderCondition = $this->defaultOrder;
 
@@ -72,7 +72,7 @@ class Query {
     }
 
     protected function applyDateRange(string &$query, array &$queryParams): void {
-        $dateRange = \Tirreno\Utils\DateRange::getDatesRangeFromRequest();
+        $dateRange = \CyberX\Utils\DateRange::getDatesRangeFromRequest();
 
         if ($dateRange) {
             $searchConditions = (
@@ -88,8 +88,8 @@ class Query {
     }
 
     protected function applyLimit(string &$query, array &$queryParams): void {
-        $start = \Tirreno\Utils\Conversion::getIntRequestParam('start');
-        $length = \Tirreno\Utils\Conversion::getIntRequestParam('length');
+        $start = \CyberX\Utils\Conversion::getIntRequestParam('start');
+        $length = \CyberX\Utils\Conversion::getIntRequestParam('length');
 
         if (isset($start) && isset($length)) {
             $query .= ' LIMIT :length OFFSET :start';

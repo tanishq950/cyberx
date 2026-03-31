@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E22 extends \Tirreno\Assets\Rule {
+class E22 extends \CyberX\Assets\Rule {
     public const NAME = 'No consonants in email';
     public const DESCRIPTION = 'Email username does not contain any consonants.';
     public const ATTRIBUTES = [];

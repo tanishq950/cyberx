@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class P03 extends \Tirreno\Assets\Rule {
+class P03 extends \CyberX\Assets\Rule {
     public const NAME = 'Shared phone number';
     public const DESCRIPTION = 'User provided a phone number shared with another user.';
     public const ATTRIBUTES = [];

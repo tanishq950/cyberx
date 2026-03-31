@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Support\Utils\Assets;
 
-use Tirreno\Assets\Rule;
+use CyberX\Assets\Rule;
 
 /**
  * Minimal concrete Rule for unit testing:

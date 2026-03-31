@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class D10 extends \Tirreno\Assets\Rule {
+class D10 extends \CyberX\Assets\Rule {
     public const NAME = 'Potentially vulnerable User-Agent';
     public const DESCRIPTION = 'The user made a request with potentially vulnerable User-Agent.';
     public const ATTRIBUTES = [];

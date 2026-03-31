@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E14 extends \Tirreno\Assets\Rule {
+class E14 extends \CyberX\Assets\Rule {
     public const NAME = 'No MX record';
     public const DESCRIPTION = 'Email\'s domain name has no MX record, so domain is not able to have any mailboxes. It is a sign of fake mailbox.';
     public const ATTRIBUTES = ['domain'];

@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E12 extends \Tirreno\Assets\Rule {
+class E12 extends \CyberX\Assets\Rule {
     public const NAME = 'Free email and no breaches';
     public const DESCRIPTION = 'Email belongs to free provider and it doesn\'t appear in data breaches. It may be a sign of a throwaway mailbox.';
     public const ATTRIBUTES = ['email'];

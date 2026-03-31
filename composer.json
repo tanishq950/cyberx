@@ -1,9 +1,9 @@
 {
-    "name": "tirreno/tirreno",
+    "name": "cyberx/cyberx",
     "type": "project",
     "description": "Open-source security framework",
     "keywords": [
-        "tirreno",
+        "cyberx",
         "fraud-detection",
         "audit-trail",
         "analytics",
@@ -16,7 +16,7 @@
     "homepage": "https://www.tirreno.com",
     "authors": [
         {
-            "name": "Tirreno Technologies Sàrl",
+            "name": "Tanishq Mohite",
             "email": "team@tirreno.com",
             "homepage": "https://www.tirreno.com/"
         }
@@ -41,7 +41,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Tirreno\\": "app/"
+            "CyberX\\": "app/"
         }
     },
     "extra": {

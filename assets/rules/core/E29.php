@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E29 extends \Tirreno\Assets\Rule {
+class E29 extends \CyberX\Assets\Rule {
     public const NAME = 'Old breach (>3 years)';
     public const DESCRIPTION = 'The earliest data breach associated with the email appeared more than 3 years ago. Can be used as sign of aged email.';
     public const ATTRIBUTES = ['email'];

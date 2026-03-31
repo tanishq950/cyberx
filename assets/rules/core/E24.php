@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E24 extends \Tirreno\Assets\Rule {
+class E24 extends \CyberX\Assets\Rule {
     public const NAME = 'Government domain (.gov)';
     public const DESCRIPTION = 'Email belongs to government domain.';
     public const ATTRIBUTES = [];

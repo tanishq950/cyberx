@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\Database;
+use CyberX\Utils\Database;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionMethod;
 
 /**
- * Unit tests for Tirreno\Utils\Database.
+ * Unit tests for CyberX\Utils\Database.
  *
  * Covered (unit-testable without refactor):
  * - initConnect():

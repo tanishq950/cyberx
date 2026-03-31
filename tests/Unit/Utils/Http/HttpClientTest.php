@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils\Http;
 
-use Tirreno\Utils\Http\HttpClient;
-use Tirreno\Entities\HttpRequest;
-use Tirreno\Entities\HttpResponse;
+use CyberX\Utils\Http\HttpClient;
+use CyberX\Entities\HttpRequest;
+use CyberX\Entities\HttpResponse;
 use Tests\Support\FakeTransport;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Tirreno\Utils\Http\HttpClient
+ * @covers \CyberX\Utils\Http\HttpClient
  */
 final class HttpClientTest extends TestCase {
     public function testUsesFirstAvailableTransport(): void {

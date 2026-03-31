@@ -1,21 +1,21 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Utils;
+namespace CyberX\Utils;
 
 class Mailer {
     public static function send(?string $toName, string $toAddress, string $subj, string $msg, bool $html = false): array {
@@ -30,7 +30,7 @@ class Mailer {
 
         $toName = $toName ?? '';
         $data = null;
-        if (\Tirreno\Utils\Variables::getMailPassword()) {
+        if (\CyberX\Utils\Variables::getMailPassword()) {
             $data = self::sendByMailgun($toAddress, $toName, $subj, $msg, $html);
         }
 
@@ -44,11 +44,11 @@ class Mailer {
     private static function sendByMailgun(string $toAddress, string $toName, string $subj, string $msg, bool $html): array {
         $f3 = \Base::instance();
 
-        $fromName = \Tirreno\Utils\Constants::get()->MAIL_FROM_NAME;
+        $fromName = \CyberX\Utils\Constants::get()->MAIL_FROM_NAME;
         $smtpDebug = $f3->get('SMTP_DEBUG');
-        $fromAddress = \Tirreno\Utils\Variables::getMailLogin();
-        $mailLogin = \Tirreno\Utils\Variables::getMailLogin();
-        $mailPassword = \Tirreno\Utils\Variables::getMailPassword();
+        $fromAddress = \CyberX\Utils\Variables::getMailLogin();
+        $mailLogin = \CyberX\Utils\Variables::getMailLogin();
+        $mailPassword = \CyberX\Utils\Variables::getMailPassword();
 
         if ($fromAddress === null) {
             return [
@@ -63,7 +63,7 @@ class Mailer {
             //Server settings
             $mail->SMTPDebug = $smtpDebug;                                              //Enable verbose debug output
             $mail->isSMTP();                                                            //Send using SMTP
-            $mail->Host = \Tirreno\Utils\Constants::get()->MAIL_HOST;                   //Set the SMTP server to send through
+            $mail->Host = \CyberX\Utils\Constants::get()->MAIL_HOST;                   //Set the SMTP server to send through
             $mail->SMTPAuth = true;                                                     //Enable SMTP authentication
             $mail->Username = $mailLogin;                                               //SMTP username
             $mail->Password = $mailPassword;                                            //SMTP password
@@ -96,7 +96,7 @@ class Mailer {
     }
 
     private static function sendByNativeMail(string $toAddress, string $toName, string $subj, string $msg): array {
-        $sendMailPath = \Tirreno\Utils\Constants::get()->MAIL_SEND_BIN;
+        $sendMailPath = \CyberX\Utils\Constants::get()->MAIL_SEND_BIN;
 
         if (!file_exists($sendMailPath) || !is_executable($sendMailPath)) {
             return [
@@ -105,8 +105,8 @@ class Mailer {
             ];
         }
 
-        $fromName = \Tirreno\Utils\Constants::get()->MAIL_FROM_NAME;
-        $fromAddress = \Tirreno\Utils\Variables::getMailLogin();
+        $fromName = \CyberX\Utils\Constants::get()->MAIL_FROM_NAME;
+        $fromAddress = \CyberX\Utils\Variables::getMailLogin();
 
         if ($fromAddress === null) {
             return [

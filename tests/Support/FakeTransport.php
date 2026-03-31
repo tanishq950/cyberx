@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Support;
 
-use Tirreno\Entities\HttpRequest;
-use Tirreno\Entities\HttpResponse;
-use Tirreno\Interfaces\HttpTransportInterface;
+use CyberX\Entities\HttpRequest;
+use CyberX\Entities\HttpResponse;
+use CyberX\Interfaces\HttpTransportInterface;
 
 /**
  * FakeTransport is a deterministic test double for HttpTransportInterface.

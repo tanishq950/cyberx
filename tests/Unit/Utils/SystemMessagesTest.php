@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\SystemMessages;
+use CyberX\Utils\SystemMessages;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Utils\SystemMessages.
+ * Unit tests for CyberX\Utils\SystemMessages.
  *
  * Covered (unit-testable without refactor):
  * - SystemMessages::syslogLine() (PRI calculation + message normalization + output format invariants)
@@ -40,8 +40,8 @@ final class SystemMessagesTest extends TestCase {
         // PRI prefix.
         $this->assertStringStartsWith('<' . $expectedPri . '>', $line);
 
-        // App and pid are embedded as "app[PID]:" with fixed host "tirreno".
-        $this->assertStringContainsString(' tirreno ' . $app . '[' . $pid . ']: ', $line);
+        // App and pid are embedded as "app[PID]:" with fixed host "cyberx".
+        $this->assertStringContainsString(' cyberx ' . $app . '[' . $pid . ']: ', $line);
 
         // Newlines are normalized to spaces.
         $this->assertStringContainsString('Hello world !', $line);
@@ -53,7 +53,7 @@ final class SystemMessagesTest extends TestCase {
         // Timestamp format invariant: "M j H:i:s" (month short + space + day (1-2 digits) + time).
         // We don't assert exact time to keep it deterministic.
         $this->assertMatchesRegularExpression(
-            '/^<\d+>[A-Z][a-z]{2}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2}\s+tirreno\s+/',
+            '/^<\d+>[A-Z][a-z]{2}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2}\s+cyberx\s+/',
             $line
         );
     }

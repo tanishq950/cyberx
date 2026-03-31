@@ -1,28 +1,28 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Utils;
+namespace CyberX\Utils;
 
 class Routes {
     private static function getF3(): \Base {
         return \Base::instance();
     }
 
-    public static function getCurrentRequestOperator(): ?\Tirreno\Entities\Operator {
+    public static function getCurrentRequestOperator(): ?\CyberX\Entities\Operator {
         return self::getF3()->get('CURRENT_USER');
     }
 
@@ -30,13 +30,13 @@ class Routes {
         self::getF3()->set('CURRENT_USER', self::getCurrentSessionOperator());
     }
 
-    public static function getCurrentSessionOperator(): ?\Tirreno\Entities\Operator {
-        $loggedInOperatorId = \Tirreno\Utils\Conversion::intValCheckEmpty(self::getF3()->get('SESSION.active_user_id'));
+    public static function getCurrentSessionOperator(): ?\CyberX\Entities\Operator {
+        $loggedInOperatorId = \CyberX\Utils\Conversion::intValCheckEmpty(self::getF3()->get('SESSION.active_user_id'));
 
-        return $loggedInOperatorId ? \Tirreno\Entities\Operator::getById($loggedInOperatorId) : null;
+        return $loggedInOperatorId ? \CyberX\Entities\Operator::getById($loggedInOperatorId) : null;
     }
 
-    public static function getCurrentRequestApiKey(): ?\Tirreno\Entities\ApiKey {
+    public static function getCurrentRequestApiKey(): ?\CyberX\Entities\ApiKey {
         return self::getF3()->get('CURRENT_KEY');
     }
 
@@ -44,14 +44,14 @@ class Routes {
         self::getF3()->set('CURRENT_KEY', self::getCurrentSessionApiKey());
     }
 
-    public static function getCurrentSessionApiKey(): ?\Tirreno\Entities\ApiKey {
+    public static function getCurrentSessionApiKey(): ?\CyberX\Entities\ApiKey {
         $keyId = self::getF3()->get('TEST_API_KEY_ID');
 
         if (!$keyId) {
-            $keyId = \Tirreno\Utils\Conversion::intValCheckEmpty(self::getF3()->get('SESSION.active_key_id'));
+            $keyId = \CyberX\Utils\Conversion::intValCheckEmpty(self::getF3()->get('SESSION.active_key_id'));
         }
 
-        return $keyId ? \Tirreno\Entities\ApiKey::getById($keyId) : null;
+        return $keyId ? \CyberX\Entities\ApiKey::getById($keyId) : null;
     }
 
     public static function redirectIfUnlogged(string $targetPage = '/'): void {

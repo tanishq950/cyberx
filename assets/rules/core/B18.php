@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class B18 extends \Tirreno\Assets\Rule {
+class B18 extends \CyberX\Assets\Rule {
     public const NAME = 'HEAD request';
     public const DESCRIPTION = 'HTTP request HEAD method is oftenly used by bots.';
     public const ATTRIBUTES = [];

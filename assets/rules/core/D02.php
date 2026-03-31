@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class D02 extends \Tirreno\Assets\Rule {
+class D02 extends \CyberX\Assets\Rule {
     public const NAME = 'Device is Linux';
     public const DESCRIPTION = 'Linux OS is not used by avarage users, increased risk of crawler bot.';
     public const ATTRIBUTES = [];

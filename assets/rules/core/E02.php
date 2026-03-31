@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E02 extends \Tirreno\Assets\Rule {
+class E02 extends \CyberX\Assets\Rule {
     public const NAME = 'New domain and no breaches';
     public const DESCRIPTION = 'Email belongs to recently created domain name and it doesn\'t appear in data breaches. Increased risk due to lack of authenticity.';
     public const ATTRIBUTES = ['email', 'domain'];

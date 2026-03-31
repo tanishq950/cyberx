@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tirreno\Dashboard;
+namespace CyberX\Dashboard;
 
-class Constants extends \Tirreno\Assets\Constants {
+class Constants extends \CyberX\Assets\Constants {
     public const USER_DETAILS_TOTAL_LIMITS = [
         'ips'           => 7,
         'isps'          => 5,

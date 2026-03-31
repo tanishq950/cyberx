@@ -1,21 +1,21 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Controllers;
+namespace CyberX\Controllers;
 
 // can accept time params as `* * * * 0,1,2`, `0-15 * * 1 3`, but
 // not step values like `23/4 10/2 * * *`
@@ -72,10 +72,10 @@ class Cron extends \Prefab {
                     $start = self::RANGES[$i]['min'];
                     $end = self::RANGES[$i]['max'];
                 } else {
-                    $start = \Tirreno\Utils\Conversion::intValCheckEmpty($start, 0);
-                    $end = \Tirreno\Utils\Conversion::intValCheckEmpty($end, $start);
+                    $start = \CyberX\Utils\Conversion::intValCheckEmpty($start, 0);
+                    $end = \CyberX\Utils\Conversion::intValCheckEmpty($end, $start);
                 }
-                $step = \Tirreno\Utils\Conversion::intValCheckEmpty($step, 0);
+                $step = \CyberX\Utils\Conversion::intValCheckEmpty($step, 0);
 
                 if ($start > $end || $start < self::RANGES[$i]['min'] || $end > self::RANGES[$i]['max'] || $step < 1) {
                     return false;
@@ -94,11 +94,11 @@ class Cron extends \Prefab {
 
     public static function parseTimestamp(\DateTime $time): array {
         return [
-            \Tirreno\Utils\Conversion::intValCheckEmpty($time->format('i'), 0), // minute
-            \Tirreno\Utils\Conversion::intValCheckEmpty($time->format('H'), 0), // hour
-            \Tirreno\Utils\Conversion::intValCheckEmpty($time->format('d'), 1), // day of month
-            \Tirreno\Utils\Conversion::intValCheckEmpty($time->format('m'), 1), // month
-            \Tirreno\Utils\Conversion::intValCheckEmpty($time->format('w'), 0), // day of week
+            \CyberX\Utils\Conversion::intValCheckEmpty($time->format('i'), 0), // minute
+            \CyberX\Utils\Conversion::intValCheckEmpty($time->format('H'), 0), // hour
+            \CyberX\Utils\Conversion::intValCheckEmpty($time->format('d'), 1), // day of month
+            \CyberX\Utils\Conversion::intValCheckEmpty($time->format('m'), 1), // month
+            \CyberX\Utils\Conversion::intValCheckEmpty($time->format('w'), 0), // day of week
         ];
     }
 
@@ -133,15 +133,15 @@ class Cron extends \Prefab {
             return;
         }
 
-        $this->f3->set('ONERROR', \Tirreno\Utils\ErrorHandler::getCronErrorHandler());
-        \Tirreno\Utils\Database::initConnect(false);
+        $this->f3->set('ONERROR', \CyberX\Utils\ErrorHandler::getCronErrorHandler());
+        \CyberX\Utils\Database::initConnect(false);
 
         while (ob_get_level()) {
             ob_end_flush();
         }
         ob_implicit_flush(true);
 
-        \Tirreno\Utils\Updates::syncUpdates();
+        \CyberX\Utils\Updates::syncUpdates();
 
         $this->readArguments();
         $this->loadCrons();
@@ -201,7 +201,7 @@ class Cron extends \Prefab {
         }
 
         $instance->$method();
-        \Tirreno\Utils\Cron::printLogs($instance->getLog());
+        \CyberX\Utils\Cron::printLogs($instance->getLog());
     }
 
     private function isDue(\DateTime $time, string $expression): bool {

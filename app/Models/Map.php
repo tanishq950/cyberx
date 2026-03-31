@@ -1,23 +1,23 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Models;
+namespace CyberX\Models;
 
-class Map extends \Tirreno\Models\BaseSql {
+class Map extends \CyberX\Models\BaseSql {
     protected ?string $DB_TABLE_NAME = 'countries';
 
     public function getAllCountries(?string $dateFrom, ?string $dateTo, int $apiKey): array {
@@ -61,7 +61,7 @@ class Map extends \Tirreno\Models\BaseSql {
     }
 
     public function getAllCountriesByDateRange(int $apiKey): array {
-        $datesRange = \Tirreno\Utils\DateRange::getDatesRangeFromRequest();
+        $datesRange = \CyberX\Utils\DateRange::getDatesRangeFromRequest();
 
         $dateTo = $datesRange ? ($datesRange['endDate'] ?? null) : null;
         $dateFrom = $datesRange ? ($datesRange['startDate'] ?? null) : null;

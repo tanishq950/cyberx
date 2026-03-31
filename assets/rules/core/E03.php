@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E03 extends \Tirreno\Assets\Rule {
+class E03 extends \CyberX\Assets\Rule {
     public const NAME = 'Suspicious words in email';
     public const DESCRIPTION = 'Email contains word parts that usually found in automatically generated mailboxes.';
     public const ATTRIBUTES = [];

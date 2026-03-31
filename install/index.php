@@ -308,7 +308,7 @@ function finishError(): string {
 
 $steps = [
     [
-        'description' => 'tirreno version',
+        'description' => 'cyberx version',
         'tasks' => [
             ['description' => 'Latest version check', 'status' => null],
         ],
@@ -474,13 +474,13 @@ function versionCheck(int $step, array &$steps): void {
     $steps[$step]['tasks'][0]['status'] = $versionStatus;
 
     if ($versionStatus === false) {
-        $steps[$step]['tasks'][0]['description'] = 'A newer version of tirreno is available';
+        $steps[$step]['tasks'][0]['description'] = 'A newer version of cyberx is available';
         $steps[$step]['tasks'][0]['warn'] = true;
     } elseif ($versionStatus === null) {
         $steps[$step]['tasks'][0]['description'] = 'Unable to connect to version server';
         $steps[$step]['tasks'][0]['warn'] = true;
     } else {
-        $steps[$step]['tasks'][0]['description'] = 'This is the latest version of tirreno';
+        $steps[$step]['tasks'][0]['description'] = 'This is the latest version of cyberx';
     }
 }
 
@@ -837,9 +837,9 @@ function checkLatestVersion(): ?bool {
 
     require_once $path;
 
-    $version = \Tirreno\Utils\VersionControl::versionString();
+    $version = \CyberX\Utils\VersionControl::versionString();
 
-    $useragent = 'tirreno-install';
+    $useragent = 'cyberx-install';
     $useragent = $version ? $useragent . '/' . $version : $useragent;
     $useragent = 'User-Agent: ' . $useragent;
 

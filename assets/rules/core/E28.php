@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E28 extends \Tirreno\Assets\Rule {
+class E28 extends \CyberX\Assets\Rule {
     public const NAME = 'No digits in email';
     public const DESCRIPTION = 'The email address does not include digits.';
     public const ATTRIBUTES = [];

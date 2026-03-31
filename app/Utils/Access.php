@@ -1,27 +1,27 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Utils;
+namespace CyberX\Utils;
 
 class Access {
     public static function cleanHost(): void {
         $f3 = \Base::instance();
 
-        $host = \Tirreno\Utils\Variables::getHostWithProtocol();
+        $host = \CyberX\Utils\Variables::getHostWithProtocol();
         $host = strtolower(parse_url($host, PHP_URL_HOST));
 
         $f3->set('HOST', $host);
@@ -34,21 +34,21 @@ class Access {
         $csrf = $f3->get('SESSION.csrf');
 
         if (!isset($token) || $token === '' || !isset($csrf) || $csrf === '' || $token !== $csrf) {
-            return \Tirreno\Utils\ErrorCodes::CSRF_ATTACK_DETECTED;
+            return \CyberX\Utils\ErrorCodes::CSRF_ATTACK_DETECTED;
         }
 
         return false;
     }
 
     public static function checkApiKeyAccess(int $keyId, int $operatorId): bool {
-        $model = new \Tirreno\Models\ApiKeys();
+        $model = new \CyberX\Models\ApiKeys();
         $keyExists = $model->existsByKeyAndOperatorId($keyId, $operatorId);
 
         if ($keyExists) {
             return true;
         }
 
-        $coOwnerModel = new \Tirreno\Models\ApiKeyCoOwner();
+        $coOwnerModel = new \CyberX\Models\ApiKeyCoOwner();
         $key = $coOwnerModel->getCoOwnershipKeyId($operatorId);
 
         return boolval($key);
@@ -61,22 +61,22 @@ class Access {
     }
 
     public static function getCurrentOperatorId(): ?int {
-        return \Tirreno\Utils\Routes::getCurrentRequestOperator()?->id;
+        return \CyberX\Utils\Routes::getCurrentRequestOperator()?->id;
     }
 
     public static function getCurrentOperatorApiKeyId(): ?int {
-        return \Tirreno\Utils\Routes::getCurrentRequestApiKey()?->id;
+        return \CyberX\Utils\Routes::getCurrentRequestApiKey()?->id;
     }
 
     public static function hashPassword(string $password): string {
-        $pepper = \Tirreno\Utils\Variables::getPepper();
+        $pepper = \CyberX\Utils\Variables::getPepper();
         $pepperedPassword = hash_hmac('sha256', $password, $pepper);
 
         return password_hash($pepperedPassword, PASSWORD_DEFAULT);
     }
 
     public static function verifyPassword(string $unverified, string $password): bool {
-        $pepper = \Tirreno\Utils\Variables::getPepper();
+        $pepper = \CyberX\Utils\Variables::getPepper();
         $pepperedPassword = hash_hmac('sha256', $unverified, $pepper);
 
         return password_verify($pepperedPassword, $password);

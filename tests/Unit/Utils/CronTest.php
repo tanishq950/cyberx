@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\Cron;
+use CyberX\Utils\Cron;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Utils\Cron.
+ * Unit tests for CyberX\Utils\Cron.
  *
  * Covered (unit-testable without refactor):
  * - Cron::getHashes()

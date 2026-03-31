@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class B12 extends \Tirreno\Assets\Rule {
+class B12 extends \CyberX\Assets\Rule {
     public const NAME = 'New account (1 week)';
     public const DESCRIPTION = 'The account has been created this week.';
     public const ATTRIBUTES = [];

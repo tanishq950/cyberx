@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Support\Utils\Lists;
 
-use Tirreno\Utils\Assets\Lists\Url;
+use CyberX\Utils\Assets\Lists\Url;
 
 /**
  * Stub: disables filesystem access.

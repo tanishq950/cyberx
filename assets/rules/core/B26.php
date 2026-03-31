@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class B26 extends \Tirreno\Assets\Rule {
+class B26 extends \CyberX\Assets\Rule {
     public const NAME = 'Single event sessions';
     public const DESCRIPTION = 'User had sessions with only one event.';
     public const ATTRIBUTES = [];

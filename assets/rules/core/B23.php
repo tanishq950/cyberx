@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class B23 extends \Tirreno\Assets\Rule {
+class B23 extends \CyberX\Assets\Rule {
     public const NAME = 'User\'s full name contains space or hyphen';
     public const DESCRIPTION = 'Full name contains space or hyphen, which is a rare behaviour for regular users.';
     public const ATTRIBUTES = [];

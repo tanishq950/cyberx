@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils\Http;
 
-use Tirreno\Entities\HttpRequest;
-use Tirreno\Utils\Http\StreamTransport;
+use CyberX\Entities\HttpRequest;
+use CyberX\Utils\Http\StreamTransport;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Tirreno\Utils\Http\StreamTransport
+ * @covers \CyberX\Utils\Http\StreamTransport
  */
 final class StreamTransportTest extends TestCase {
     protected function tearDown(): void {

@@ -8,7 +8,7 @@ use Tests\Support\Utils\Assets\PreparedEqualsRule;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Assets\Rule.
+ * Unit tests for CyberX\Assets\Rule.
  *
  * Covered (unit-testable without refactor):
  * - execute():

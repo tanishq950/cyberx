@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils\Http;
 
-use Tirreno\Utils\Http\HeaderUtils;
+use CyberX\Utils\Http\HeaderUtils;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Tirreno\Utils\Http\HeaderUtils
+ * @covers \CyberX\Utils\Http\HeaderUtils
  */
 final class HeaderUtilsTest extends TestCase {
     public function testEnsureHeaderAddsHeaderWhenMissing(): void {

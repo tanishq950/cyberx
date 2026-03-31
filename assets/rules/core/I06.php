@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class I06 extends \Tirreno\Assets\Rule {
+class I06 extends \CyberX\Assets\Rule {
     public const NAME = 'IP belongs to datacenter';
     public const DESCRIPTION = 'The user is utilizing an ISP datacenter, which highly suggests the use of a VPN, script, or privacy software.';
     public const ATTRIBUTES = ['ip'];

@@ -1,23 +1,23 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Models\Enrichment;
+namespace CyberX\Models\Enrichment;
 
-class LocalhostIp extends \Tirreno\Models\Enrichment\Base {
+class LocalhostIp extends \CyberX\Models\Enrichment\Base {
     protected string $ip;           // ipvanyaddress
     protected int $country = 0;
     protected ?int $asn = 0;
@@ -33,7 +33,7 @@ class LocalhostIp extends \Tirreno\Models\Enrichment\Base {
     public function init(array $data): void {
         $this->ip = $data['value'];
 
-        if (!\Tirreno\Utils\Conversion::filterIp($this->ip) || $data['error'] !== \Tirreno\Utils\Constants::get()->ENRICHMENT_IP_IS_BOGON) {
+        if (!\CyberX\Utils\Conversion::filterIp($this->ip) || $data['error'] !== \CyberX\Utils\Constants::get()->ENRICHMENT_IP_IS_BOGON) {
             throw new \Exception('Validation failed');
         }
     }
@@ -54,13 +54,13 @@ class LocalhostIp extends \Tirreno\Models\Enrichment\Base {
 
     // TODO: update countries table counters
     public function updateEntityInDb(int $entityId, int $apiKey): void {
-        $ipModel = new \Tirreno\Models\Ip();
+        $ipModel = new \CyberX\Models\Ip();
 
         $previousIpData = $ipModel->getFullIpInfoById($entityId, $apiKey);
         $previousIspId = count($previousIpData) ? $previousIpData['ispid'] : null;
         $previousCountryId = count($previousIpData) ? $previousIpData['country_id'] : 0;
         // get current isp id
-        $ispModel = new \Tirreno\Models\Isp();
+        $ispModel = new \CyberX\Models\Isp();
         $newIspId = $ispModel->getIdByAsn($this->asn, $apiKey);
 
         $newIspData = [
@@ -68,7 +68,7 @@ class LocalhostIp extends \Tirreno\Models\Enrichment\Base {
             'name'          => $this->name,
             'description'   => $this->description,
         ];
-        $newIspModel = new \Tirreno\Models\Enrichment\Isp();
+        $newIspModel = new \CyberX\Models\Enrichment\Isp();
         $newIspModel->init($newIspData);
 
         // new isp is not in db
@@ -81,7 +81,7 @@ class LocalhostIp extends \Tirreno\Models\Enrichment\Base {
 
         $this->isp = $newIspId;
 
-        $countryModel = new \Tirreno\Models\Country();
+        $countryModel = new \CyberX\Models\Country();
         $newCountryId = $this->country;
 
         $countryRecord = $countryModel->getCountryById($newCountryId, $apiKey);
@@ -108,7 +108,7 @@ class LocalhostIp extends \Tirreno\Models\Enrichment\Base {
                 event_ip.key = :key
         ");
 
-        $model = new \Tirreno\Models\Ip();
+        $model = new \CyberX\Models\Ip();
         $model->execQuery($query, $params);
 
         // update totals only after event_ip update!

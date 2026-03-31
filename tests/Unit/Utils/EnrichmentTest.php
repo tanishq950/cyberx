@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\Enrichment;
+use CyberX\Utils\Enrichment;
 use PHPUnit\Framework\TestCase;
 
 /**

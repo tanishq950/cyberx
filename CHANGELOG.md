@@ -1,6 +1,6 @@
-# tirreno changelog
+# cyberx changelog
 
-## tirreno v0.9.12
+## cyberx v0.9.12
 
 * flexible assets class for UI constants in `/assets/dashboard/Constants.php`
 * rules presets selector on signup
@@ -8,7 +8,7 @@
 * getDictionaryRequestParam() for Utils\Conversion
 * singleton for server constants
 
-## tirreno v0.9.11
+## cyberx v0.9.11
 
 * github workflow
 * UI constants in `/assets/dashboard/constants.php`
@@ -18,7 +18,7 @@
 * user details view update
 * rules presets
 
-## tirreno v0.9.10
+## cyberx v0.9.10
 
 * only strict_types
 * API overload protection
@@ -34,7 +34,7 @@
 * average instead of median for per-user stats
 * blacklisted accounts counter in menu
 
-## tirreno v0.9.9
+## cyberx v0.9.9
 
 * user activity sparklines charts
 * sessions stat collection
@@ -48,7 +48,7 @@
 * jquery-autocomplete update
 * minor bug fixes
 
-## tirreno v0.9.8
+## cyberx v0.9.8
 
 * field audit trail via new event type `field_edit`
 * optional payload for event types `page_search` and `account_email_change`
@@ -59,7 +59,7 @@
 * Fat-Free Framework update
 * minor bug fixes
 
-## tirreno v0.9.7
+## cyberx v0.9.7
 
 * DataTables 2.3.2
 * different type for event bars charts
@@ -74,7 +74,7 @@
 * fix timestamps localization in panels
 * enhanced .htaccess
 
-## tirreno v0.9.6
+## cyberx v0.9.6
 
 * flexible rule system
 * heroku automated deployment
@@ -85,7 +85,7 @@
 * device detector updates
 * /config/local dir for custom configs and extensions
 
-## tirreno v0.9.5
+## cyberx v0.9.5
 
 * new search filters for blacklist and users
 * review queue and automated blacklisting thresholds
@@ -95,7 +95,7 @@
 * default 1D range for grids
 * blacklist API
 
-## tirreno v0.9.4
+## cyberx v0.9.4
 
 * new search filters for types of events and IPs
 * failed login attempt widget for the dashboard screen
@@ -108,7 +108,7 @@
 * lint configurations
 * [wip] review queue threshold settings
 
-## tirreno v0.9.3
+## cyberx v0.9.3
 
 * user graph on /event plot
 * clickable countries on svg map
@@ -116,12 +116,12 @@
 * index.php in all subdirs to prevent directory listing
 * force utf-8 sensor input
 
-## tirreno v0.9.2
+## cyberx v0.9.2
 
 * XSS vulnerability patch
 * optimize getLastEvent()
 
-## tirreno v0.9.1
+## cyberx v0.9.1
 
 * data plotting with hour and minute resolution
 * minor bug fixes
@@ -129,6 +129,6 @@
 * js linting improvements
 * logbook search fix
 
-## tirreno v0.9.0
+## cyberx v0.9.0
 
 * initial release

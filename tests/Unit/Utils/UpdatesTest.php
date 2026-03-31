@@ -7,14 +7,14 @@ namespace Tests\Unit\Utils;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Unit tests for Tirreno\Utils\Updates.
+ * Unit tests for CyberX\Utils\Updates.
  *
  * Covered (unit-testable without refactor):
  * - None.
  *
  * Not covered (unstable without refactor):
  * - Updates::syncUpdates():
- *   - instantiates \Tirreno\Models\Updates($f3) and calls checkDb(...) (DB required)
+ *   - instantiates \CyberX\Models\Updates($f3) and calls checkDb(...) (DB required)
  *   - may instantiate controller and call updateRules(...) (side effects)
  *   - Routes::callExtra('UPDATES') is unreachable in unit test because DB-dependent code executes before it
  *

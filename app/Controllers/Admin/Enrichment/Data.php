@@ -1,28 +1,28 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Controllers\Admin\Enrichment;
+namespace CyberX\Controllers\Admin\Enrichment;
 
-class Data extends \Tirreno\Controllers\Admin\Base\Data {
+class Data extends \CyberX\Controllers\Admin\Base\Data {
     public function enrichEntity(string $type, ?string $search, ?int $entityId, int $apiKey, ?string $enrichmentKey): array {
         if ($enrichmentKey === null) {
-            return ['ERROR_CODE' => \Tirreno\Utils\ErrorCodes::ENRICHMENT_API_KEY_NOT_EXISTS];
+            return ['ERROR_CODE' => \CyberX\Utils\ErrorCodes::ENRICHMENT_API_KEY_NOT_EXISTS];
         }
-        set_error_handler([\Tirreno\Utils\ErrorHandler::class, 'exceptionErrorHandler']);
+        set_error_handler([\CyberX\Utils\ErrorHandler::class, 'exceptionErrorHandler']);
         $search = $search !== null ? ['value' => $search] : null;
         $result = $this->enrichEntityProcess($type, $search, $entityId, $apiKey, $enrichmentKey);
         restore_error_handler();
@@ -31,11 +31,11 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
     }
 
     private function enrichEntityProcess(string $type, ?array $search, ?int $entityId, int $apiKey, ?string $enrichmentKey): array {
-        $processErrorMessage = ['ERROR_CODE' => \Tirreno\Utils\ErrorCodes::ENRICHMENT_API_UNKNOWN_ERROR];
+        $processErrorMessage = ['ERROR_CODE' => \CyberX\Utils\ErrorCodes::ENRICHMENT_API_UNKNOWN_ERROR];
 
         if ($type === 'device') {
             if ($entityId !== null) {
-                $model = new \Tirreno\Models\Device();
+                $model = new \CyberX\Models\Device();
                 $device = $model->getFullDeviceInfoById($entityId, $apiKey);
                 if ($device !== []) {
                     $entityId = $device['ua_id'];
@@ -48,11 +48,11 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
             }
         }
 
-        $model = new \Tirreno\Models\ApiKeys();
+        $model = new \CyberX\Models\ApiKeys();
         $attributes = $model->enrichableAttributes($apiKey);
 
         if (!array_key_exists($type, $attributes)) {
-            return ['ERROR_CODE' => \Tirreno\Utils\ErrorCodes::ENRICHMENT_API_ATTR_UNAVAILABLE];
+            return ['ERROR_CODE' => \CyberX\Utils\ErrorCodes::ENRICHMENT_API_ATTR_UNAVAILABLE];
         }
 
         $modelDb = null;
@@ -60,27 +60,27 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
         $extraModel = null;
         switch ($type) {
             case 'ip':
-                $modelDb        = new \Tirreno\Models\Ip();
-                $modelResult    = new \Tirreno\Models\Enrichment\Ip();
-                $extraModel     = new \Tirreno\Models\Enrichment\LocalhostIp();
+                $modelDb        = new \CyberX\Models\Ip();
+                $modelResult    = new \CyberX\Models\Enrichment\Ip();
+                $extraModel     = new \CyberX\Models\Enrichment\LocalhostIp();
                 break;
             case 'email':
-                $modelDb        = new \Tirreno\Models\Email();
-                $modelResult    = new \Tirreno\Models\Enrichment\Email();
+                $modelDb        = new \CyberX\Models\Email();
+                $modelResult    = new \CyberX\Models\Enrichment\Email();
                 break;
             case 'domain':
-                $modelDb        = new \Tirreno\Models\Domain();
-                $modelResult    = new \Tirreno\Models\Enrichment\DomainFound();
-                $extraModel     = new \Tirreno\Models\Enrichment\DomainNotFound();
+                $modelDb        = new \CyberX\Models\Domain();
+                $modelResult    = new \CyberX\Models\Enrichment\DomainFound();
+                $extraModel     = new \CyberX\Models\Enrichment\DomainNotFound();
                 break;
             case 'phone':
-                $modelDb        = new \Tirreno\Models\Phone();
-                $modelResult    = new \Tirreno\Models\Enrichment\PhoneValid();
-                $extraModel     = new \Tirreno\Models\Enrichment\PhoneInvalid();
+                $modelDb        = new \CyberX\Models\Phone();
+                $modelResult    = new \CyberX\Models\Enrichment\PhoneValid();
+                $extraModel     = new \CyberX\Models\Enrichment\PhoneInvalid();
                 break;
             case 'ua':
-                $modelDb        = new \Tirreno\Models\Device();
-                $modelResult    = new \Tirreno\Models\Enrichment\Device();
+                $modelDb        = new \CyberX\Models\Device();
+                $modelResult    = new \CyberX\Models\Enrichment\Device();
                 break;
         }
 
@@ -98,21 +98,21 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
 
         try {
             [$statusCode, $response,] = $this->enrichEntityByValue($type, $value, $enrichmentKey);
-            $error = \Tirreno\Utils\ApiResponseFormats::getErrorResponseFormat();
-            $apiError = \Tirreno\Utils\ApiResponseFormats::matchResponse($response[$type] ?? [], $error) ? $response[$type]['error'] : null;
+            $error = \CyberX\Utils\ApiResponseFormats::getErrorResponseFormat();
+            $apiError = \CyberX\Utils\ApiResponseFormats::matchResponse($response[$type] ?? [], $error) ? $response[$type]['error'] : null;
         } catch (\ErrorException $e) {
             return $processErrorMessage;
         }
 
         if ($statusCode === 403) {
-            return ['ERROR_CODE' => \Tirreno\Utils\ErrorCodes::ENRICHMENT_API_KEY_OVERUSE];
+            return ['ERROR_CODE' => \CyberX\Utils\ErrorCodes::ENRICHMENT_API_KEY_OVERUSE];
         }
 
         if ($type === 'ip') {
             // do not raise on bogon ip
-            if ($apiError === \Tirreno\Utils\Constants::get()->ENRICHMENT_IP_IS_NOT_FOUND) {
-                return ['ERROR_CODE' => \Tirreno\Utils\ErrorCodes::ENRICHMENT_API_IP_NOT_FOUND];
-            } elseif ($apiError !== null && $apiError !== \Tirreno\Utils\Constants::get()->ENRICHMENT_IP_IS_BOGON || $statusCode !== 200 || $response[$type] === null) {
+            if ($apiError === \CyberX\Utils\Constants::get()->ENRICHMENT_IP_IS_NOT_FOUND) {
+                return ['ERROR_CODE' => \CyberX\Utils\ErrorCodes::ENRICHMENT_API_IP_NOT_FOUND];
+            } elseif ($apiError !== null && $apiError !== \CyberX\Utils\Constants::get()->ENRICHMENT_IP_IS_BOGON || $statusCode !== 200 || $response[$type] === null) {
                 return $processErrorMessage;
             }
         } elseif ($apiError !== null || $statusCode !== 200 || $response[$type] === null) {
@@ -150,7 +150,7 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
 
     private function validateResponse(string $requestType, int $statusCode, ?array $result, string $errorMessage): bool|string|int {
         if (!is_array($result)) {
-            return \Tirreno\Utils\ErrorCodes::ENRICHMENT_API_UNKNOWN_ERROR;
+            return \CyberX\Utils\ErrorCodes::ENRICHMENT_API_UNKNOWN_ERROR;
         }
 
         if ($statusCode === 200 && is_array($result[$requestType])) {
@@ -172,11 +172,11 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
         }
 
         if (strlen($errorMessage) > 0) {
-            \Tirreno\Utils\Logger::log('Enrichment API web error', $errorMessage);
+            \CyberX\Utils\Logger::log('Enrichment API web error', $errorMessage);
         }
 
         if (!isset($messages) || strlen($messages) < 1) {
-            return \Tirreno\Utils\ErrorCodes::ENRICHMENT_API_UNKNOWN_ERROR;
+            return \CyberX\Utils\ErrorCodes::ENRICHMENT_API_UNKNOWN_ERROR;
         }
 
         return $messages;
@@ -186,7 +186,7 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
         $postFields = [
             $type => $value['value'],
         ];
-        $response = \Tirreno\Utils\Network::sendApiRequest($postFields, '/query', 'POST', $enrichmentKey);
+        $response = \CyberX\Utils\Network::sendApiRequest($postFields, '/query', 'POST', $enrichmentKey);
         $code = $response->code();
         $result = $response->body();
 
@@ -198,7 +198,7 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
     }
 
     public function getNotCheckedEntitiesCount(int $apiKey): array {
-        $model = new \Tirreno\Models\ApiKeys();
+        $model = new \CyberX\Models\ApiKeys();
         $models = $model->enrichableAttributes($apiKey);
         $result = [];
 
@@ -210,7 +210,7 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
     }
 
     public function getNotCheckedExists(int $apiKey): bool {
-        $model = new \Tirreno\Models\ApiKeys();
+        $model = new \CyberX\Models\ApiKeys();
         $models = $model->enrichableAttributes($apiKey);
 
         foreach ($models as $model) {
@@ -223,7 +223,7 @@ class Data extends \Tirreno\Controllers\Admin\Base\Data {
     }
 
     public function getNotCheckedEntitiesByUserId(int $userId, int $apiKey): array {
-        $model = new \Tirreno\Models\ApiKeys();
+        $model = new \CyberX\Models\ApiKeys();
         $models = $model->enrichableAttributes($apiKey);
         $result = [];
 

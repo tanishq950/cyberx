@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class E10 extends \Tirreno\Assets\Rule {
+class E10 extends \CyberX\Assets\Rule {
     public const NAME = 'The website is unavailable';
     public const DESCRIPTION = 'Domain\'s website seems to be inactive, which could be a sign of fake mailbox.';
     public const ATTRIBUTES = ['domain'];

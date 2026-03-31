@@ -1,8 +1,8 @@
 <?php
 
-namespace Tirreno\Rules\Core;
+namespace CyberX\Rules\Core;
 
-class I02 extends \Tirreno\Assets\Rule {
+class I02 extends \CyberX\Assets\Rule {
     public const NAME = 'IP hosting domain';
     public const DESCRIPTION = 'Higher risk of crawler bot. Such IP addresses are used only for hosting and are not provided to regular users by ISP.';
     public const ATTRIBUTES = ['ip'];

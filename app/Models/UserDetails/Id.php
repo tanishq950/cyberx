@@ -1,23 +1,23 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Models\UserDetails;
+namespace CyberX\Models\UserDetails;
 
-class Id extends \Tirreno\Models\BaseSql implements \Tirreno\Interfaces\ApiKeyAccessAuthorizationInterface {
+class Id extends \CyberX\Models\BaseSql implements \CyberX\Interfaces\ApiKeyAccessAuthorizationInterface {
     protected ?string $DB_TABLE_NAME = 'event_account';
 
     public function checkAccess(int $subjectId, int $apiKey): bool {
@@ -83,7 +83,7 @@ class Id extends \Tirreno\Models\BaseSql implements \Tirreno\Interfaces\ApiKeyAc
         $result = $results[0] ?? [];
 
         $tsColumns = ['created', 'lastseen', 'score_updated_at', 'latest_decision', 'updated', 'added_to_review'];
-        \Tirreno\Utils\Timezones::localizeTimestampsForActiveOperator($tsColumns, $result);
+        \CyberX\Utils\Timezones::localizeTimestampsForActiveOperator($tsColumns, $result);
 
         return $result;
     }

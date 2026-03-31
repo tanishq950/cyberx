@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Utils;
 
-use Tirreno\Utils\Constants;
+use CyberX\Utils\Constants;
 use Base;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Runner\ErrorException;
 
 /**
- * Unit tests for Tirreno\Utils\Constants.
+ * Unit tests for CyberX\Utils\Constants.
  *
  * Focus:
  * - Constants::get() behavior (native constant lookup + F3 overrides)

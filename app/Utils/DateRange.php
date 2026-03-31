@@ -1,21 +1,21 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Utils;
+namespace CyberX\Utils;
 
 class DateRange {
     private static function getF3(): \Base {
@@ -23,7 +23,7 @@ class DateRange {
     }
 
     public static function isQueueTimeouted(string $updated): bool {
-        return !self::inIntervalTillNow($updated, \Tirreno\Utils\Constants::get()->ACCOUNT_OPERATION_QUEUE_AUTO_UNCLOG_AFTER_SEC);
+        return !self::inIntervalTillNow($updated, \CyberX\Utils\Constants::get()->ACCOUNT_OPERATION_QUEUE_AUTO_UNCLOG_AFTER_SEC);
     }
 
     public static function getDatesRangeByGivenDates(string $startDate, string $endDate, int $offset): array {
@@ -35,9 +35,9 @@ class DateRange {
 
     public static function getDatesRangeFromRequest(int $offset = 0): ?array {
         $dates      = null;
-        $dateTo     = \Tirreno\Utils\Conversion::getStringRequestParam('dateTo', true);
-        $dateFrom   = \Tirreno\Utils\Conversion::getStringRequestParam('dateFrom', true);
-        $keepDates  = \Tirreno\Utils\Conversion::getIntRequestParam('keepDates', true);
+        $dateTo     = \CyberX\Utils\Conversion::getStringRequestParam('dateTo', true);
+        $dateFrom   = \CyberX\Utils\Conversion::getStringRequestParam('dateFrom', true);
+        $keepDates  = \CyberX\Utils\Conversion::getIntRequestParam('keepDates', true);
 
         if ($dateTo && $dateFrom) {
             $dates = self::getDatesRangeByGivenDates($dateFrom, $dateTo, $offset);
@@ -53,7 +53,7 @@ class DateRange {
     }
 
     public static function getLatestNDatesRangeFromRequest(int $days, int $offset = 0): array {
-        $day = \Tirreno\Utils\Constants::get()->SECONDS_IN_DAY;
+        $day = \CyberX\Utils\Constants::get()->SECONDS_IN_DAY;
 
         return [
             'endDate'   => date('Y-m-d 23:59:59', time() + $offset),
@@ -62,9 +62,9 @@ class DateRange {
     }
 
     public static function getResolutionFromRequest(): string {
-        $resolution = \Tirreno\Utils\Conversion::getStringRequestParam('resolution', true) ?? 'day';
+        $resolution = \CyberX\Utils\Conversion::getStringRequestParam('resolution', true) ?? 'day';
 
-        return array_key_exists($resolution, \Tirreno\Utils\Constants::get()->CHART_RESOLUTION) ? $resolution : 'day';
+        return array_key_exists($resolution, \CyberX\Utils\Constants::get()->CHART_RESOLUTION) ? $resolution : 'day';
     }
 
     public static function inIntervalTillNow(?string $time, int $interval): ?bool {

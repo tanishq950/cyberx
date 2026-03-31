@@ -1,29 +1,29 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Controllers\Admin\UserAgent;
+namespace CyberX\Controllers\Admin\UserAgent;
 
-class Page extends \Tirreno\Controllers\Admin\Base\Page {
+class Page extends \CyberX\Controllers\Admin\Base\Page {
     public ?string $page = 'AdminUserAgent';
 
     public function getPageParams(): array {
         $dataController = new Data();
-        $apiKey = \Tirreno\Utils\ApiKeys::getCurrentOperatorApiKeyId();
-        $userAgentId = \Tirreno\Utils\Conversion::getIntUrlParam('userAgentId');
+        $apiKey = \CyberX\Utils\ApiKeys::getCurrentOperatorApiKeyId();
+        $userAgentId = \CyberX\Utils\Conversion::getIntUrlParam('userAgentId');
         $hasAccess = $dataController->checkIfOperatorHasAccess($userAgentId, $apiKey);
 
         if (!$hasAccess) {

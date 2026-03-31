@@ -1,21 +1,21 @@
 <?php
 
 /**
- * tirreno ~ open-source security framework
- * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * cyberx ~ open-source security framework
+ * Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  *
  * Licensed under GNU Affero General Public License version 3 of the or any later version.
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tanishq Mohite (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/AGPL-3.0 AGPL License
- * @link          https://www.tirreno.com Tirreno(tm)
+ * @link          https://www.tirreno.com CyberX(tm)
  */
 
 declare(strict_types=1);
 
-namespace Tirreno\Utils;
+namespace CyberX\Utils;
 
 class ErrorHandler {
     public static function getErrorDetails(\Base $f3): array {
@@ -60,7 +60,7 @@ class ErrorHandler {
     }
 
     public static function saveErrorInformation(\Base $f3, array $errorData): void {
-        \Tirreno\Utils\Logger::log(null, $errorData['message']);
+        \CyberX\Utils\Logger::log(null, $errorData['message']);
 
         $errorTraceArray = explode('<br>', $errorData['trace']);
         $printErrorTraceToLog = $f3->get('PRINT_ERROR_TRACE_TO_LOG');
@@ -68,24 +68,24 @@ class ErrorHandler {
             $iters = count($errorTraceArray);
 
             for ($i = 0; $i < $iters; ++$i) {
-                \Tirreno\Utils\Logger::log(null, $errorTraceArray[$i]);
+                \CyberX\Utils\Logger::log(null, $errorTraceArray[$i]);
             }
         }
 
-        $database = \Tirreno\Utils\Database::getDb();
-        if ($database && \Tirreno\Utils\Routes::getCurrentRequestOperator()) {
+        $database = \CyberX\Utils\Database::getDb();
+        if ($database && \CyberX\Utils\Routes::getCurrentRequestOperator()) {
             $errorData['sql_log'] = $database->log();
-            $logModel = new \Tirreno\Models\Log();
+            $logModel = new \CyberX\Models\Log();
             $logModel->insertRecord($errorData);
 
-            \Tirreno\Utils\Logger::log('SQL', $errorData['sql_log']);
+            \CyberX\Utils\Logger::log('SQL', $errorData['sql_log']);
         }
 
         if ($errorData['code'] === 500) {
             $toName = 'Admin';
-            $toAddress = \Tirreno\Utils\Variables::getAdminEmail();
+            $toAddress = \CyberX\Utils\Variables::getAdminEmail();
             if ($toAddress === null) {
-                \Tirreno\Utils\Logger::log('Log mail error', 'ADMIN_EMAIL is not set');
+                \CyberX\Utils\Logger::log('Log mail error', 'ADMIN_EMAIL is not set');
 
                 return;
             }
@@ -97,12 +97,12 @@ class ErrorHandler {
             $errorMessage = $errorData['message'];
             $errorTrace = $errorData['trace'];
 
-            $hosts = json_encode(\Tirreno\Utils\Variables::getHosts());
+            $hosts = json_encode(\CyberX\Utils\Variables::getHosts());
 
             $message = $f3->get('error_email_body_template');
             $message = sprintf($message, $currentTime, $hosts, $errorMessage, $errorTrace);
 
-            \Tirreno\Utils\Mailer::send($toName, $toAddress, $subject, $message, true);
+            \CyberX\Utils\Mailer::send($toName, $toAddress, $subject, $message, true);
         }
     }
 
@@ -151,8 +151,8 @@ class ErrorHandler {
                 return;
             }
 
-            $response = new \Tirreno\Views\Frontend();
-            $pageController = new \Tirreno\Controllers\Pages\Error();
+            $response = new \CyberX\Views\Frontend();
+            $pageController = new \CyberX\Controllers\Pages\Error();
 
             $errorData['message'] = 'ERROR_' . $errorData['code'];
             $errorData['raw'] = false;
@@ -163,17 +163,17 @@ class ErrorHandler {
             }
 
             if ($errorData['code'] === 400) {
-                $errorData['message'] = 'Error code ' . \Tirreno\Utils\ErrorCodes::INVALID_HOSTNAME;
-                $errorData['extra_message'] = 'Visit page via correct hostname: ' . \Tirreno\Utils\Variables::getHostWithProtocol() . $f3->get('PATH');
+                $errorData['message'] = 'Error code ' . \CyberX\Utils\ErrorCodes::INVALID_HOSTNAME;
+                $errorData['extra_message'] = 'Visit page via correct hostname: ' . \CyberX\Utils\Variables::getHostWithProtocol() . $f3->get('PATH');
             }
 
             if ($errorData['code'] === 503) {
-                $errorData['message'] = 'Error code ' . \Tirreno\Utils\ErrorCodes::FAILED_DB_CONNECT;
+                $errorData['message'] = 'Error code ' . \CyberX\Utils\ErrorCodes::FAILED_DB_CONNECT;
                 $errorData['extra_message'] = 'Database connection failed.';
             }
 
             if ($errorData['code'] === 422) {
-                $errorData['message'] = 'Error code ' . \Tirreno\Utils\ErrorCodes::INCOMPLETE_CONFIG;
+                $errorData['message'] = 'Error code ' . \CyberX\Utils\ErrorCodes::INCOMPLETE_CONFIG;
                 $errorData['extra_message'] = 'App configuration is incomplete. Check config/local/config.local.ini and possible environment overrides.';
             }
 
